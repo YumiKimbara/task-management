@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import classes from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import ListContext from "../../Context/ListContext";
 
 const Header = () => {
+  const listCtx = useContext(ListContext);
   return (
     <>
       <div className={classes.headerContainer}>
@@ -23,7 +25,18 @@ const Header = () => {
           </form>
         </div>
         <div>
-          <StarRoundedIcon className={classes.icons} />
+          <StarRoundedIcon
+            className={classes.icons}
+            onClick={() => {
+              listCtx.dispatchList({
+                type: "KEY_TASK_PAGE",
+                payload: true,
+              });
+              {
+                console.log(listCtx.keyTaskPage);
+              }
+            }}
+          />
         </div>
       </div>
     </>

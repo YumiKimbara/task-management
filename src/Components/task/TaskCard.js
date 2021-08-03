@@ -9,10 +9,12 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
-import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+
+import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles({
   root: {
@@ -22,11 +24,6 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     margin: "0.5rem",
   },
-  // bullet: {
-  //   display: "inline-block",
-  //   margin: "0 2px",
-  //   transform: "scale(0.8)",
-  // },
   title: {
     fontSize: 14,
   },
@@ -35,73 +32,135 @@ const useStyles = makeStyles({
   },
 });
 
-const TaskCard = () => {
+const TaskCard = ({ cardData }) => {
   const classes = useStyles();
   const listCtx = useContext(ListContext);
 
-  console.log(listCtx.storeTaskData);
+  // const changeToDone = (id, task, e) => {
+  //   console.log(id, task);
+  //   console.log(listCtx.storeTaskData);
+  //   const taskLeft = listCtx.storeTaskData.filter((cardInfo) => {
+  //     return cardInfo.id !== id;
+  //   });
+
+  //   console.log(taskLeft);
+  //   taskLeft.map((data) => {
+  //     listCtx.dispatchList({
+  //       type: "LEFT_TASK",
+  //       payload: {
+  //         taskLeft,
+  //       },
+  //     });
+  //     console.log(listCtx.leftTaskData);
+  //   });
+
+  //   if (e.target.checked === true) {
+  //     listCtx.dispatchList({
+  //       type: "DONE_TASK",
+  //       payload: {
+  //         id: id,
+  //         task: task,
+  //       },
+  //     });
+  //   }
+  //   console.log(e.target.value);
+  //   console.log(listCtx.leftTaskData);
+  //   console.log(listCtx.doneTaskData);
+  // };
+
+  const changeToDone = (data, e) => {
+    listCtx.dispatchList({
+      type: "DONE_TASK",
+      payload: data,
+    });
+
+    // console.log(id, task);
+    // console.log(listCtx.storeTaskData);
+    // const taskLeft = listCtx.storeTaskData.filter((cardInfo) => {
+    //   return cardInfo.id !== id;
+    // });
+
+    // console.log(taskLeft);
+    // taskLeft.map((data) => {
+    //   listCtx.dispatchList({
+    //     type: "LEFT_TASK",
+    //     payload: {
+    //       taskLeft,
+    //     },
+    //   });
+    //   console.log(listCtx.leftTaskData);
+    // });
+
+    // if (e.target.checked === true) {
+    //   listCtx.dispatchList({
+    //     type: "DONE_TASK",
+    //     payload: {
+    //       id: id,
+    //       task: task,
+    //     },
+    //   });
+    // }
+    // console.log(e.target.value);
+    // console.log(listCtx.leftTaskData);
+    // console.log(listCtx.doneTaskData);
+  };
+  const changeToUnDone = (data, e) => {
+    listCtx.dispatchList({
+      type: "UNDONE_TASK",
+      payload: data,
+    });
+  };
+
+  const changeToKeyTask = (data, e) => {
+    if (e.target.checked) {
+      listCtx.dispatchList({
+        type: "KEY_TASK",
+        payload: data,
+      });
+      console.log(listCtx.storeTaskData);
+    }
+  };
+
+  const deleteTask = (data) => {
+    console.log(data.id);
+    // console.log(
+    //   listCtx.storeTaskData.filter((data) => {
+    //     console.log(data.id);
+    //   })
+    // );
+
+    listCtx.dispatchList({
+      type: "DELETE_TASK",
+      payload: data,
+    });
+  };
 
   return (
     <>
-      {listCtx.storeTaskData &&
-        listCtx.storeTaskData.map((data, i) => {
+      {cardData &&
+        cardData.map((data, i) => {
           return (
-            <div className={classes.root}>
+            <div className={classes.root} key={data.id}>
               <Card className={classes.root}>
                 <CardContent>
                   <FormControlLabel
-                    control={<Checkbox name="checkedB" color="primary" />}
+                    control={
+                      //checkされているかどうかをisDone使って切り分ける。
+                      <Checkbox
+                        checked={data.isDone ? true : false}
+                        name="checkedB"
+                        color="primary"
+                        id={data.id}
+                      />
+                    }
                     type="checkbox"
                     id="task"
                     name="task"
-                    onClick={() => {
-                      const taskLeft = listCtx.storeTaskData.filter((data) => {
-                        return data.id !== listCtx.storeTaskData[i].id;
-                      });
-                      const taskDone = listCtx.storeTaskData.filter((data) => {
-                        return data.id === listCtx.storeTaskData[i].id;
-                      });
-
-                      const task1 = taskLeft.map((data) => {
-                        return data.task;
-                      });
-                      const id1 = taskLeft.map((data) => {
-                        return data.id;
-                      });
-
-                      const task2 = taskDone.map((data) => {
-                        return data.task;
-                      });
-                      const id2 = taskDone.map((data) => {
-                        return data.id;
-                      });
-
-                      listCtx.dispatchList({
-                        type: "LEFT_TASK",
-                        payload: {
-                          id: { ...id1, id1 },
-                          task: { ...task1, task1 },
-                        },
-                      });
-
-                      listCtx.dispatchList({
-                        type: "DONE_TASK",
-                        payload: {
-                          id: { ...id2, id2 },
-                          task: { ...task2, task2 },
-                        },
-                      });
-
-                      console.log(
-                        `taskLeft: ${JSON.stringify(
-                          taskLeft
-                        )}, taskDone: ${JSON.stringify(taskDone)}`
-                      );
-                      console.log(
-                        `left: ${JSON.stringify(
-                          listCtx.leftTaskData
-                        )}, done: ${JSON.stringify(listCtx.doneTaskData)}`
-                      );
+                    onClick={(e) => {
+                      // changeToDone(data.id, data.task, e);
+                      e.target.checked
+                        ? changeToDone(data, e)
+                        : changeToUnDone(data, e);
                     }}
                   />
                   <label htmlFor="task">{data.task}</label>
@@ -110,9 +169,29 @@ const TaskCard = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        icon={<StarBorderRoundedIcon />}
+                        onClick={(e) => {
+                          data.isDone && deleteTask(data);
+                          changeToKeyTask(data, e);
+                        }}
+                        icon={
+                          data.isDone && !data.isKey ? (
+                            <DeleteIcon />
+                          ) : !data.isDone && !data.isKey ? (
+                            <StarBorderRoundedIcon />
+                          ) : data.isKey ? (
+                            <StarRoundedIcon style={{ color: "#fdc500" }} />
+                          ) : (
+                            ""
+                          )
+                        }
                         checkedIcon={
-                          <StarRoundedIcon style={{ color: "#fdc500" }} />
+                          data.isDone ? (
+                            <DeleteIcon
+                              style={{ color: "rgba(0, 0, 0, 0.54)" }}
+                            />
+                          ) : (
+                            <StarRoundedIcon style={{ color: "#fdc500" }} />
+                          )
                         }
                         name="checkedH"
                       />
@@ -128,70 +207,3 @@ const TaskCard = () => {
 };
 
 export default TaskCard;
-
-// {listCtx.storeTaskData &&
-//   listCtx.storeTaskData.map((data, i) => {
-//     return (
-//       <div className={classes.cardContainer}>
-//         <input
-//           type="checkbox"
-//           id="task"
-//           name="task"
-//           onClick={() => {
-//             const taskLeft = listCtx.storeTaskData.filter(
-//               (data) => {
-//                 return data.id !== listCtx.storeTaskData[i].id;
-//               }
-//             );
-//             const taskDone = listCtx.storeTaskData.filter(
-//               (data) => {
-//                 return data.id === listCtx.storeTaskData[i].id;
-//               }
-//             );
-
-//             const task1 = taskLeft.map((data) => {
-//               return data.task;
-//             });
-//             const id1 = taskLeft.map((data) => {
-//               return data.id;
-//             });
-
-//             const task2 = taskDone.map((data) => {
-//               return data.task;
-//             });
-//             const id2 = taskDone.map((data) => {
-//               return data.id;
-//             });
-
-//             listCtx.dispatchList({
-//               type: "LEFT_TASK",
-//               payload: {
-//                 id: { ...id1, id1 },
-//                 task: { ...task1, task1 },
-//               },
-//             });
-
-//             listCtx.dispatchList({
-//               type: "DONE_TASK",
-//               payload: {
-//                 id: { ...id2, id2 },
-//                 task: { ...task2, task2 },
-//               },
-//             });
-
-//             console.log(
-//               `taskLeft: ${JSON.stringify(
-//                 taskLeft
-//               )}, taskDone: ${JSON.stringify(taskDone)}`
-//             );
-//             console.log(
-//               `left: ${JSON.stringify(
-//                 listCtx.leftTaskData
-//               )}, done: ${JSON.stringify(listCtx.doneTaskData)}`
-//             );
-//           }}
-//         />
-//         <label htmlFor="task">{data.task}</label>
-//       </div>
-//     );
-//   })}

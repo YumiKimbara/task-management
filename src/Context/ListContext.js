@@ -11,6 +11,7 @@ export const ListContextProvider = (props) => {
     taskText: "",
     leftTaskData: [],
     doneTaskData: [],
+    keyTaskPage: false,
   };
 
   const [state, dispatchList] = useReducer(ListReducer, initialState);
@@ -24,6 +25,7 @@ export const ListContextProvider = (props) => {
         leftTaskData: state.leftTaskData,
         doneTaskData: state.doneTaskData,
         taskText: state.taskText,
+        keyTaskPage: state.keyTaskPage,
         dispatchList: dispatchList,
       }}
     >

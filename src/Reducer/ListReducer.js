@@ -2,8 +2,8 @@ const ListReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
       return { addTask: true };
-    case "DELETE_TASK":
-      return { deleteTask: true };
+    // case "DELETE_TASK":
+    //   return { deleteTask: true };
     case "STORE_TASK":
       // state = {
       //   addTask: false,
@@ -42,19 +42,66 @@ const ListReducer = (state, action) => {
         ...state,
         //storeTaskData内に前回までのstateとaction.payloadを入れるようにする。
         storeTaskData: [...state.storeTaskData, action.payload],
+        isKey: false,
       };
-    case "LEFT_TASK":
-      return {
-        ...state,
-        leftTaskData: [...state.leftTaskData, action.payload],
-      };
+    // case "LEFT_TASK":
+    //   return {
+    //     ...state,
+    //     leftTaskData: [action.payload],
+    //   };
+    // case "DONE_TASK":
+    //   return {
+    //     ...state,
+    //     doneTaskData: [...state.doneTaskData, action.payload],
+    //   };
     case "DONE_TASK":
+      // action = { type: "nanika", payload: { id: ??? } }
+
       return {
         ...state,
-        doneTaskData: [...state.doneTaskData, action.payload],
+        storeTaskData: state.storeTaskData.map((taskData) => {
+          if (action.payload.id === taskData.id) {
+            // 元々あるtaskDataのうち、isDoneだけ更新する。
+            return { ...taskData, isDone: true };
+          }
+
+          return taskData;
+        }),
+      };
+    case "UNDONE_TASK":
+      return {
+        ...state,
+        storeTaskData: state.storeTaskData.map((taskData) => {
+          if (action.payload.id === taskData.id) {
+            // 元々あるtaskDataのうち、isDoneだけ更新する。
+            return { ...taskData, isDone: false };
+          }
+
+          return taskData;
+        }),
+      };
+    case "KEY_TASK":
+      return {
+        ...state,
+        storeTaskData: state.storeTaskData.map((taskData) => {
+          if (action.payload.id === taskData.id) {
+            // 元々あるtaskDataのうち、isDoneだけ更新する。
+            return { ...taskData, isKey: true };
+          }
+          return taskData;
+        }),
+      };
+    case "DELETE_TASK":
+      return {
+        ...state,
+        storeTaskData: state.storeTaskData.filter((taskData) => {
+          return action.payload.id !== taskData.id;
+        }),
       };
     case "TASK_TEXT":
       return { ...state, taskText: action.payload };
+    case "KEY_TASK_PAGE":
+      return { ...state, keyTaskPage: true };
   }
 };
 

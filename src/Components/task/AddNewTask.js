@@ -49,23 +49,43 @@ const AddNewTask = () => {
       return;
     }
 
-    if (listCtx.taskText.trim() !== "") {
+    if (listCtx.taskText.trim() !== "" && !listCtx.keyTaskPage) {
       listCtx.dispatchList({
         type: "STORE_TASK",
         payload: {
           id: uuidv4(),
           task: listCtx.taskText,
+          isDone: false,
         },
       });
       listCtx.dispatchList({
         type: "TASK_TEXT",
         payload: "",
       });
+      console.log(listCtx.storeTaskData);
+    }
+
+    if (listCtx.taskText.trim() !== "" && listCtx.keyTaskPage) {
+      // listCtx.dispatchList({
+      //   type: "KEY_TASK",
+      //   payload: listCtx.storeTaskData,
+      // });
+      listCtx.dispatchList({
+        type: "STORE_TASK",
+        payload: {
+          id: uuidv4(),
+          task: listCtx.taskText,
+          isDone: false,
+          isKey: true,
+        },
+      });
+      listCtx.dispatchList({
+        type: "TASK_TEXT",
+        payload: "",
+      });
+      console.log(listCtx.storeTaskData);
     }
   };
-
-  console.log(listCtx.taskText);
-  console.log(listCtx.storeTaskData);
 
   return (
     <>
@@ -89,12 +109,25 @@ const AddNewTask = () => {
               variant="contained"
               color="primary"
               className={classes.button}
+              onClick={(e) => {
+                e.preventDefault();
+                console.log(listCtx.storeTaskData);
+              }}
             >
               Delete this workplace
             </Button>
           </div>
         </div>
-        <form className={classes.root}>
+        <form
+          className={classes.root}
+          onKeyDown={(e) => {
+            console.log(e.key);
+            e.key === "Enter" && createTask();
+          }}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <Fab
             size="small"
             color="primary"
@@ -142,7 +175,17 @@ const AddNewTask = () => {
         </form>
       </div>
       <div className={classes.card}>
-        <TaskCard />
+        <TaskCard
+          cardData={
+            listCtx.storeTaskData && !listCtx.keyTaskPage
+              ? listCtx.storeTaskData.filter((item) => !item.isDone)
+              : listCtx.keyTaskPage
+              ? listCtx.storeTaskData.filter(
+                  (item) => !item.isDone && item.isKey
+                )
+              : ""
+          }
+        />
       </div>
     </>
   );
