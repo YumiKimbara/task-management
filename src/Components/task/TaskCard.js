@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./Card.module.scss";
 import ListContext from "../../Context/ListContext";
 import { v4 as uuidv4 } from "uuid";
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TaskCard = ({ cardData }) => {
+const TaskCard = ({ changeSample, cardData }) => {
   const classes = useStyles();
   const listCtx = useContext(ListContext);
 
@@ -166,16 +166,29 @@ const TaskCard = ({ cardData }) => {
                   <label htmlFor="task">{data.task}</label>
                 </CardContent>
                 <CardActions>
+                  {data.isDone && (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          onClick={(e) => {
+                            data.isDone && deleteTask(data);
+                          }}
+                          icon={<DeleteIcon />}
+                          name="checkedH"
+                        />
+                      }
+                    />
+                  )}
                   <FormControlLabel
                     control={
                       <Checkbox
                         onClick={(e) => {
-                          data.isDone && deleteTask(data);
-                          changeToKeyTask(data, e);
+                          // changeToKeyTask(data, e);
+                          changeSample(e.target.value);
                         }}
                         icon={
                           data.isDone && !data.isKey ? (
-                            <DeleteIcon />
+                            <StarBorderRoundedIcon />
                           ) : !data.isDone && !data.isKey ? (
                             <StarBorderRoundedIcon />
                           ) : data.isKey ? (
@@ -185,13 +198,7 @@ const TaskCard = ({ cardData }) => {
                           )
                         }
                         checkedIcon={
-                          data.isDone ? (
-                            <DeleteIcon
-                              style={{ color: "rgba(0, 0, 0, 0.54)" }}
-                            />
-                          ) : (
-                            <StarRoundedIcon style={{ color: "#fdc500" }} />
-                          )
+                          <StarRoundedIcon style={{ color: "#fdc500" }} />
                         }
                         name="checkedH"
                       />

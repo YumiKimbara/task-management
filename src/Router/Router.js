@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Home from "../Components/pages/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "../Components/layout/Header";
@@ -19,16 +19,21 @@ const useStyles = makeStyles(() =>
 );
 
 const AppRouter = () => {
+  const [checkKey, setCheckKey] = useState(false);
   const classes = useStyles();
 
   return (
     <>
       <Router>
-        <Header />
+        <Header checkKey={checkKey} setCheckKey={setCheckKey} />
         <Switch>
           <div className={classes.sample}>
             <Route path="/" exact component={Home} />
-            <Route path="/list" exact component={List} />
+            <Route
+              path="/list"
+              exact
+              render={(props) => <List checkKey={checkKey} {...props} />}
+            />
           </div>
         </Switch>
       </Router>

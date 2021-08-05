@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const AddNewTask = () => {
+const AddNewTask = ({ checkKey }) => {
   const classes = useStyles();
   const listCtx = useContext(ListContext);
 
@@ -92,30 +92,35 @@ const AddNewTask = () => {
       <div className={classes.addNewTaskContainer}>
         <div className={classes.addNameandButton}>
           <div className={classes.workspaceName}>
-            <h2>Workspace:</h2>
-            <TextField
-              id="standard-full-width"
-              style={{ margin: 8 }}
-              placeholder="Type name of your workspace"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
+            <h2>Create your task</h2>
           </div>
           <div>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={(e) => {
-                e.preventDefault();
-                console.log(listCtx.storeTaskData);
-              }}
-            >
-              Delete this workplace
-            </Button>
+            {listCtx.storeTaskData.length === 0 ? (
+              <Button
+                disabled
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                {" "}
+                Delete this workplace
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={(e) => {
+                  e.preventDefault();
+                  listCtx.dispatchList({
+                    type: "DELETE_ALL_TASK",
+                    payload: "",
+                  });
+                }}
+              >
+                Delete this workplace
+              </Button>
+            )}
           </div>
         </div>
         <form
@@ -177,7 +182,7 @@ const AddNewTask = () => {
       <div className={classes.card}>
         <TaskCard
           cardData={
-            listCtx.storeTaskData && !listCtx.keyTaskPage
+            listCtx.storeTaskData && !checkKey
               ? listCtx.storeTaskData.filter((item) => !item.isDone)
               : listCtx.keyTaskPage
               ? listCtx.storeTaskData.filter(

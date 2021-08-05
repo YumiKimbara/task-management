@@ -98,10 +98,15 @@ const ListReducer = (state, action) => {
           return action.payload.id !== taskData.id;
         }),
       };
+    case "DELETE_ALL_TASK":
+      return {
+        ...state,
+        storeTaskData: action.payload,
+      };
     case "TASK_TEXT":
       return { ...state, taskText: action.payload };
     case "KEY_TASK_PAGE":
-      return { ...state, keyTaskPage: true };
+      return { ...state, keyTaskPage: false };
   }
 };
 

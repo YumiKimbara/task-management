@@ -4,14 +4,14 @@ import KeyTask from "../task/KeyTask";
 import TaskDone from "../task/TaskDone";
 import ListContext from "../../Context/ListContext";
 
-const List = () => {
+const List = ({ checkKey }) => {
   const listCtx = useContext(ListContext);
 
   return (
     <>
-      {console.log(listCtx.keyTaskPage)}
-      <AddNewTask />
-      {listCtx.keyTaskPage === true ? <KeyTask /> : <TaskDone />}
+      {console.log(checkKey)}
+      <AddNewTask checkKey={checkKey} />
+      {checkKey ? <KeyTask /> : <TaskDone />}
     </>
   );
 };
