@@ -36,13 +36,7 @@ const Header = ({ checkKey, setCheckKey }) => {
     <>
       <div className={classes.headerContainer}>
         <div>
-          <h3
-            onClick={() => {
-              localStorage.setItem("Key", "保存する値");
-            }}
-          >
-            Task Management
-          </h3>
+          <h3>Task Management</h3>
         </div>
         <div>
           {checkKey ? (

@@ -1,14 +1,17 @@
 import { Home } from "@material-ui/core";
-import React, { useReducer, useContext } from "react";
+import React, { useReducer } from "react";
 import HomeReducer from "../Reducer/HomeReducer";
 
 const HomeContext = React.createContext();
 
 export const HomeContextProvider = (props) => {
+  const storedTask = localStorage.getItem("task");
+  const jsonTask = JSON.parse(storedTask);
+
   const initialState = {
     addTask: false,
     deleteTask: false,
-    storeTaskData: [],
+    storeTaskData: jsonTask ? jsonTask : [],
     taskText: "",
     leftTaskData: [],
     doneTaskData: [],

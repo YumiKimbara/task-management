@@ -73,9 +73,9 @@ const AddNewTask = ({ checkKey }) => {
 
   const [error, setError] = useState(false);
 
-  // useEffect(() => {
-  //   localStorage.setItem("task", JSON.stringify(listCtx.storeTaskData));
-  // }, [listCtx.storeTaskData]);
+  useEffect(() => {
+    localStorage.setItem("task", JSON.stringify(homeCtx.storeTaskData));
+  }, [homeCtx.storeTaskData]);
 
   const createTask = () => {
     if (homeCtx.taskText.trim() === "") {
@@ -121,9 +121,6 @@ const AddNewTask = ({ checkKey }) => {
     //   console.log(listCtx.storeTaskData);
     // }
   };
-
-  // const getTask = localStorage.getItem("task");
-  // const jsonTask = JSON.parse(getTask);
 
   const primary = orange[500];
   return (
