@@ -1,4 +1,4 @@
-const ListReducer = (state, action) => {
+const HomeReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
       return { addTask: true };
@@ -17,7 +17,7 @@ const ListReducer = (state, action) => {
       //   deleteTask: false,
       //   storeTaskData: [{
       //     id: uuidv4(),
-      //     task: listCtx.taskText,
+      //     task: HomeCtx.taskText,
       //   }],
       //   taskText: "",
       // };
@@ -110,4 +110,4 @@ const ListReducer = (state, action) => {
   }
 };
 
-export default ListReducer;
+export default HomeReducer;

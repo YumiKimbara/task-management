@@ -1,26 +1,25 @@
 import React, { useContext } from "react";
-import classes from "./TaskDone.module.scss";
-import ListContext from "../../Context/ListContext";
+import HomeContext from "../../Context/HomeContext";
 import TaskCard from "./TaskCard";
 
 const TaskDone = () => {
-  const listCtx = useContext(ListContext);
+  const homeCtx = useContext(HomeContext);
 
   const checkDone =
-    listCtx.storeTaskData && listCtx.storeTaskData.map((data) => data.isDone);
+    homeCtx.storeTaskData && homeCtx.storeTaskData.map((data) => data.isDone);
 
   console.log(checkDone);
 
   return (
     <>
       {checkDone.includes(true) && (
-        <div className={classes.taskDoneContainer}>
+        <div>
           <h2>Done</h2>
           {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
           <TaskCard
             cardData={
-              listCtx.storeTaskData &&
-              listCtx.storeTaskData.filter((item) => item.isDone)
+              homeCtx.storeTaskData &&
+              homeCtx.storeTaskData.filter((item) => item.isDone)
             }
           />
         </div>

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import ListContext from "../../Context/ListContext";
+import HomeContext from "../../Context/HomeContext";
 import { v4 as uuidv4 } from "uuid";
 import { createStyles, makeStyles, withStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
@@ -69,7 +69,7 @@ const OrangeTextField = withStyles({
 
 const AddNewTask = ({ checkKey }) => {
   const classes = useStyles();
-  const listCtx = useContext(ListContext);
+  const homeCtx = useContext(HomeContext);
 
   const [error, setError] = useState(false);
 
@@ -78,26 +78,26 @@ const AddNewTask = ({ checkKey }) => {
   // }, [listCtx.storeTaskData]);
 
   const createTask = () => {
-    if (listCtx.taskText.trim() === "") {
+    if (homeCtx.taskText.trim() === "") {
       setError(true);
       return;
     }
 
-    if (listCtx.taskText.trim() !== "") {
-      listCtx.dispatchList({
+    if (homeCtx.taskText.trim() !== "") {
+      homeCtx.dispatchHome({
         type: "STORE_TASK",
         payload: {
           id: uuidv4(),
-          task: listCtx.taskText,
+          task: homeCtx.taskText,
           isDone: false,
         },
       });
 
-      listCtx.dispatchList({
+      homeCtx.dispatchHome({
         type: "TASK_TEXT",
         payload: "",
       });
-      console.log(listCtx.storeTaskData);
+      console.log(homeCtx.storeTaskData);
     }
 
     // if (listCtx.taskText.trim() !== "" && listCtx.keyTaskPage) {
@@ -134,7 +134,7 @@ const AddNewTask = ({ checkKey }) => {
             <h2>Create your task</h2>
           </div>
           <div>
-            {listCtx.storeTaskData.length === 0 ? (
+            {homeCtx.storeTaskData.length === 0 ? (
               <Button
                 disabled
                 variant="contained"
@@ -151,7 +151,7 @@ const AddNewTask = ({ checkKey }) => {
                 className={classes.button}
                 onClick={(e) => {
                   e.preventDefault();
-                  listCtx.dispatchList({
+                  homeCtx.dispatchHome({
                     type: "DELETE_ALL_TASK",
                     payload: "",
                   });
@@ -185,10 +185,10 @@ const AddNewTask = ({ checkKey }) => {
               error
               fullWidth
               helperText="Type your task"
-              value={listCtx.taskText}
+              value={homeCtx.taskText}
               onChange={(e) => {
                 setError(false);
-                listCtx.dispatchList({
+                homeCtx.dispatchHome({
                   type: "TASK_TEXT",
                   payload: e.target.value,
                 });
@@ -203,9 +203,9 @@ const AddNewTask = ({ checkKey }) => {
               InputLabelProps={{
                 shrink: true,
               }}
-              value={listCtx.taskText}
+              value={homeCtx.taskText}
               onChange={(e) => {
-                listCtx.dispatchList({
+                homeCtx.dispatchHome({
                   type: "TASK_TEXT",
                   payload: e.target.value,
                 });
@@ -217,10 +217,10 @@ const AddNewTask = ({ checkKey }) => {
       <div className={classes.card}>
         <TaskCard
           cardData={
-            listCtx.storeTaskData && !checkKey
-              ? listCtx.storeTaskData.filter((item) => !item.isDone)
-              : listCtx.keyTaskPage
-              ? listCtx.storeTaskData.filter(
+            homeCtx.storeTaskData && !checkKey
+              ? homeCtx.storeTaskData.filter((item) => !item.isDone)
+              : homeCtx.keyTaskPage
+              ? homeCtx.storeTaskData.filter(
                   (item) => !item.isDone && item.isKey
                 )
               : ""

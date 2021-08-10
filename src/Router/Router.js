@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Home from "../Components/pages/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "../Components/layout/Header";
-import List from "../Components/pages/List";
+import Home from "../Components/pages/Home";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>
@@ -30,9 +30,9 @@ const AppRouter = () => {
           <div className={classes.sample}>
             <Route path="/" exact component={Home} />
             <Route
-              path="/list"
+              path="/Home"
               exact
-              render={(props) => <List checkKey={checkKey} {...props} />}
+              render={(props) => <Home checkKey={checkKey} {...props} />}
             />
           </div>
         </Switch>

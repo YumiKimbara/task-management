@@ -1,13 +1,37 @@
-import React, { useContext, useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
-import classes from "./Header.module.scss";
-//import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
-import ListContext from "../../Context/ListContext";
+import HomeContext from "../../Context/HomeContext";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    headerContainer: {
+      padding: "0.5rem 1.5rem",
+      boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
+      color: "#484848",
+      height: "80px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+
+    starRoundIcon: {
+      fontSize: "2rem",
+      color: "#fdc500",
+      cursor: "pointer",
+    },
+
+    starBorderRoundIcon: {
+      fontSize: "2rem",
+      cursor: "pointer",
+    },
+  })
+);
 
 const Header = ({ checkKey, setCheckKey }) => {
-  const listCtx = useContext(ListContext);
+  const classes = useStyles();
+  const homeCtx = useContext(HomeContext);
   return (
     <>
       <div className={classes.headerContainer}>
@@ -17,7 +41,7 @@ const Header = ({ checkKey, setCheckKey }) => {
               localStorage.setItem("Key", "保存する値");
             }}
           >
-            ToDoList
+            Task Management
           </h3>
         </div>
         <div>

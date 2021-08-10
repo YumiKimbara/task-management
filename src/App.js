@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "./Components/layout/Header";
-import List from "./Components/pages/List";
+import Home from "./Components/pages/Home";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>
@@ -24,7 +24,7 @@ const App = () => {
     <>
       <Header checkKey={checkKey} setCheckKey={setCheckKey} />
       <div className={classes.sample}>
-        <List heckKey={checkKey} />
+        <Home checkKey={checkKey} />
       </div>
     </>
   );

@@ -1,12 +1,17 @@
-import React from "react";
-import CreateWorkspace from "../workspaces/CreateWorkspace";
-import WorkspaseCards from "../workspaces/WorkspaceCards";
+import React, { useContext } from "react";
+import AddNewTask from "../task/AddNewTask";
+import KeyTask from "../task/KeyTask";
+import TaskDone from "../task/TaskDone";
+import HomeContext from "../../Context/HomeContext";
 
-const Home = () => {
+const Home = ({ checkKey }) => {
+  const homeCtx = useContext(HomeContext);
+
   return (
     <>
-      <WorkspaseCards />
-      <CreateWorkspace />
+      {console.log(checkKey)}
+      <AddNewTask checkKey={checkKey} />
+      {checkKey ? <KeyTask /> : <TaskDone />}
     </>
   );
 };

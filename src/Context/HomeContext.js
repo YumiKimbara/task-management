@@ -1,10 +1,10 @@
-import { List } from "@material-ui/core";
+import { Home } from "@material-ui/core";
 import React, { useReducer, useContext } from "react";
-import ListReducer from "../Reducer/ListReducer";
+import HomeReducer from "../Reducer/HomeReducer";
 
-const ListContext = React.createContext();
+const HomeContext = React.createContext();
 
-export const ListContextProvider = (props) => {
+export const HomeContextProvider = (props) => {
   const initialState = {
     addTask: false,
     deleteTask: false,
@@ -15,10 +15,10 @@ export const ListContextProvider = (props) => {
     keyTaskPage: false,
   };
 
-  const [state, dispatchList] = useReducer(ListReducer, initialState);
+  const [state, dispatchHome] = useReducer(HomeReducer, initialState);
 
   return (
-    <ListContext.Provider
+    <HomeContext.Provider
       value={{
         addTask: state.addTask,
         deleteTask: state.deleteTask,
@@ -27,12 +27,12 @@ export const ListContextProvider = (props) => {
         doneTaskData: state.doneTaskData,
         taskText: state.taskText,
         keyTaskPage: state.keyTaskPage,
-        dispatchList: dispatchList,
+        dispatchHome: dispatchHome,
       }}
     >
       {props.children}
-    </ListContext.Provider>
+    </HomeContext.Provider>
   );
 };
 
-export default ListContext;
+export default HomeContext;

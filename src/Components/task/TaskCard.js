@@ -1,14 +1,11 @@
 import React, { useContext, useState } from "react";
-import ListContext from "../../Context/ListContext";
-import { v4 as uuidv4 } from "uuid";
+import HomeContext from "../../Context/HomeContext";
 
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
@@ -44,7 +41,9 @@ const OrangeCheckbox = withStyles({
 
 const TaskCard = ({ keyHandler, cardData }) => {
   const classes = useStyles();
-  const listCtx = useContext(ListContext);
+  const homeCtx = useContext(HomeContext);
+
+  const [key, setKey] = useState("");
 
   // const changeToDone = (id, task, e) => {
   //   console.log(id, task);
@@ -79,7 +78,7 @@ const TaskCard = ({ keyHandler, cardData }) => {
   // };
 
   const changeToDone = (data, e) => {
-    listCtx.dispatchList({
+    homeCtx.dispatchHome({
       type: "DONE_TASK",
       payload: data,
     });
@@ -115,7 +114,7 @@ const TaskCard = ({ keyHandler, cardData }) => {
     // console.log(listCtx.doneTaskData);
   };
   const changeToUnDone = (data, e) => {
-    listCtx.dispatchList({
+    homeCtx.dispatchHome({
       type: "UNDONE_TASK",
       payload: data,
     });
@@ -123,11 +122,10 @@ const TaskCard = ({ keyHandler, cardData }) => {
 
   const changeToKeyTask = (data, e) => {
     if (e.target.checked) {
-      listCtx.dispatchList({
+      homeCtx.dispatchHome({
         type: "KEY_TASK",
         payload: data,
       });
-      console.log(listCtx.storeTaskData);
     }
   };
 
@@ -139,7 +137,7 @@ const TaskCard = ({ keyHandler, cardData }) => {
     //   })
     // );
 
-    listCtx.dispatchList({
+    homeCtx.dispatchHome({
       type: "DELETE_TASK",
       payload: data,
     });
@@ -194,7 +192,8 @@ const TaskCard = ({ keyHandler, cardData }) => {
                       <Checkbox
                         onClick={(e) => {
                           console.log(e.target.checked);
-                          keyHandler(e.target.checked);
+                          setKey(e.target.checked);
+                          keyHandler(key);
                         }}
                         icon={
                           data.isDone && !data.isKey ? (

@@ -1,26 +1,24 @@
-import React, { useContext, useState } from "react";
-import classes from "./TaskDone.module.scss";
-import ListContext from "../../Context/ListContext";
+import React, { useContext } from "react";
+import HomeContext from "../../Context/HomeContext";
 import TaskCard from "./TaskCard";
 
 const KeyTask = () => {
-  const listCtx = useContext(ListContext);
-  const [key, setKey] = useState("");
+  const homeCtx = useContext(HomeContext);
 
   const keyHandler = (isKeyTask) => {
-    setKey(isKeyTask);
+    console.log(isKeyTask);
   };
 
   return (
     <>
-      <div className={classes.taskDoneContainer}>
+      <div>
         <h2>Key Task Done</h2>
         {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
         <TaskCard
           keyHandler={keyHandler}
           cardData={
-            listCtx.storeTaskData &&
-            listCtx.storeTaskData.filter((item) => item.isKey)
+            homeCtx.storeTaskData &&
+            homeCtx.storeTaskData.filter((item) => item.isKey)
           }
         />
       </div>
