@@ -12,16 +12,13 @@ const Header = ({ checkKey, setCheckKey }) => {
     <>
       <div className={classes.headerContainer}>
         <div>
-          <h3>ToDoList</h3>
-        </div>
-        <div>
-          <form>
-            <input
-              type="text"
-              placeholder="Search"
-              className={classes.searchBox}
-            />
-          </form>
+          <h3
+            onClick={() => {
+              localStorage.setItem("Key", "保存する値");
+            }}
+          >
+            ToDoList
+          </h3>
         </div>
         <div>
           {checkKey ? (

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
-import classes from "./AddNewTask.module.scss";
+import React, { useContext, useState, useEffect } from "react";
 import ListContext from "../../Context/ListContext";
 import { v4 as uuidv4 } from "uuid";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, withStyles } from "@material-ui/core/styles";
+import { orange } from "@material-ui/core/colors";
 import Button from "@material-ui/core/Button";
 import TaskCard from "./TaskCard";
 import TextField from "@material-ui/core/TextField";
@@ -37,11 +37,45 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+const OrangeButton = withStyles({
+  root: {
+    backgroundColor: orange[800],
+    color: "white",
+    "&:hover": {
+      backgroundColor: orange[800],
+      color: "white",
+    },
+  },
+})((props) => <Button color="default" {...props} />);
+
+const OrangeFab = withStyles({
+  root: {
+    backgroundColor: orange[800],
+    color: "white",
+    "&:hover": {
+      backgroundColor: orange[800],
+      color: "white",
+    },
+  },
+})((props) => <Fab color="default" {...props} />);
+
+const OrangeTextField = withStyles({
+  root: {
+    "& .MuiInput-underline:after": {
+      borderBottomColor: orange[800],
+    },
+  },
+})((props) => <TextField color="default" {...props} />);
+
 const AddNewTask = ({ checkKey }) => {
   const classes = useStyles();
   const listCtx = useContext(ListContext);
 
   const [error, setError] = useState(false);
+
+  // useEffect(() => {
+  //   localStorage.setItem("task", JSON.stringify(listCtx.storeTaskData));
+  // }, [listCtx.storeTaskData]);
 
   const createTask = () => {
     if (listCtx.taskText.trim() === "") {
@@ -49,7 +83,7 @@ const AddNewTask = ({ checkKey }) => {
       return;
     }
 
-    if (listCtx.taskText.trim() !== "" && !listCtx.keyTaskPage) {
+    if (listCtx.taskText.trim() !== "") {
       listCtx.dispatchList({
         type: "STORE_TASK",
         payload: {
@@ -58,6 +92,7 @@ const AddNewTask = ({ checkKey }) => {
           isDone: false,
         },
       });
+
       listCtx.dispatchList({
         type: "TASK_TEXT",
         payload: "",
@@ -65,28 +100,32 @@ const AddNewTask = ({ checkKey }) => {
       console.log(listCtx.storeTaskData);
     }
 
-    if (listCtx.taskText.trim() !== "" && listCtx.keyTaskPage) {
-      // listCtx.dispatchList({
-      //   type: "KEY_TASK",
-      //   payload: listCtx.storeTaskData,
-      // });
-      listCtx.dispatchList({
-        type: "STORE_TASK",
-        payload: {
-          id: uuidv4(),
-          task: listCtx.taskText,
-          isDone: false,
-          isKey: true,
-        },
-      });
-      listCtx.dispatchList({
-        type: "TASK_TEXT",
-        payload: "",
-      });
-      console.log(listCtx.storeTaskData);
-    }
+    // if (listCtx.taskText.trim() !== "" && listCtx.keyTaskPage) {
+    //   // listCtx.dispatchList({
+    //   //   type: "KEY_TASK",
+    //   //   payload: listCtx.storeTaskData,
+    //   // });
+    //   listCtx.dispatchList({
+    //     type: "STORE_TASK",
+    //     payload: {
+    //       id: uuidv4(),
+    //       task: listCtx.taskText,
+    //       isDone: false,
+    //       isKey: true,
+    //     },
+    //   });
+    //   listCtx.dispatchList({
+    //     type: "TASK_TEXT",
+    //     payload: "",
+    //   });
+    //   console.log(listCtx.storeTaskData);
+    // }
   };
 
+  // const getTask = localStorage.getItem("task");
+  // const jsonTask = JSON.parse(getTask);
+
+  const primary = orange[500];
   return (
     <>
       <div className={classes.addNewTaskContainer}>
@@ -99,16 +138,16 @@ const AddNewTask = ({ checkKey }) => {
               <Button
                 disabled
                 variant="contained"
-                color="primary"
+                // color="primary"
                 className={classes.button}
               >
                 {" "}
                 Delete this workplace
               </Button>
             ) : (
-              <Button
+              <OrangeButton
                 variant="contained"
-                color="primary"
+                // color=`${primary}`
                 className={classes.button}
                 onClick={(e) => {
                   e.preventDefault();
@@ -119,7 +158,7 @@ const AddNewTask = ({ checkKey }) => {
                 }}
               >
                 Delete this workplace
-              </Button>
+              </OrangeButton>
             )}
           </div>
         </div>
@@ -133,21 +172,18 @@ const AddNewTask = ({ checkKey }) => {
             e.preventDefault();
           }}
         >
-          <Fab
+          <OrangeFab
             size="small"
-            color="primary"
             aria-label="add"
             className={classes.margin}
             onClick={createTask}
           >
             <AddIcon />
-          </Fab>
+          </OrangeFab>
           {error ? (
             <TextField
               error
-              id="standard-error-helper-text"
               fullWidth
-              defaultValue="Hello World"
               helperText="Type your task"
               value={listCtx.taskText}
               onChange={(e) => {
@@ -159,8 +195,7 @@ const AddNewTask = ({ checkKey }) => {
               }}
             />
           ) : (
-            <TextField
-              id="standard-full-width"
+            <OrangeTextField
               style={{ margin: 8 }}
               placeholder="Add new task here"
               fullWidth

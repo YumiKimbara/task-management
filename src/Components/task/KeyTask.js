@@ -5,10 +5,10 @@ import TaskCard from "./TaskCard";
 
 const KeyTask = () => {
   const listCtx = useContext(ListContext);
-  const [sample, setSample] = useState("");
+  const [key, setKey] = useState("");
 
-  const changeSample = (isKeyTask) => {
-    setSample(isKeyTask);
+  const keyHandler = (isKeyTask) => {
+    setKey(isKeyTask);
   };
 
   return (
@@ -17,7 +17,7 @@ const KeyTask = () => {
         <h2>Key Task Done</h2>
         {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
         <TaskCard
-          changeSample={changeSample}
+          keyHandler={keyHandler}
           cardData={
             listCtx.storeTaskData &&
             listCtx.storeTaskData.filter((item) => item.isKey)

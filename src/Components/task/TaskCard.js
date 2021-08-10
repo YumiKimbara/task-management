@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import classes from "./Card.module.scss";
 import ListContext from "../../Context/ListContext";
 import { v4 as uuidv4 } from "uuid";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { orange } from "@material-ui/core/colors";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -32,7 +32,17 @@ const useStyles = makeStyles({
   },
 });
 
-const TaskCard = ({ changeSample, cardData }) => {
+const OrangeCheckbox = withStyles({
+  root: {
+    color: orange[400],
+    "&$checked": {
+      color: orange[800],
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
+const TaskCard = ({ keyHandler, cardData }) => {
   const classes = useStyles();
   const listCtx = useContext(ListContext);
 
@@ -146,10 +156,9 @@ const TaskCard = ({ changeSample, cardData }) => {
                   <FormControlLabel
                     control={
                       //checkされているかどうかをisDone使って切り分ける。
-                      <Checkbox
+                      <OrangeCheckbox
                         checked={data.isDone ? true : false}
                         name="checkedB"
-                        color="primary"
                         id={data.id}
                       />
                     }
@@ -175,6 +184,7 @@ const TaskCard = ({ changeSample, cardData }) => {
                           }}
                           icon={<DeleteIcon />}
                           name="checkedH"
+                          color=""
                         />
                       }
                     />
@@ -183,8 +193,8 @@ const TaskCard = ({ changeSample, cardData }) => {
                     control={
                       <Checkbox
                         onClick={(e) => {
-                          // changeToKeyTask(data, e);
-                          changeSample(e.target.value);
+                          console.log(e.target.checked);
+                          keyHandler(e.target.checked);
                         }}
                         icon={
                           data.isDone && !data.isKey ? (
