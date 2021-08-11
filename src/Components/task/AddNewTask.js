@@ -101,27 +101,6 @@ const AddNewTask = ({ checkKey }) => {
       });
       console.log(homeCtx.storeTaskData);
     }
-
-    // if (listCtx.taskText.trim() !== "" && listCtx.keyTaskPage) {
-    //   // listCtx.dispatchList({
-    //   //   type: "KEY_TASK",
-    //   //   payload: listCtx.storeTaskData,
-    //   // });
-    //   listCtx.dispatchList({
-    //     type: "STORE_TASK",
-    //     payload: {
-    //       id: uuidv4(),
-    //       task: listCtx.taskText,
-    //       isDone: false,
-    //       isKey: true,
-    //     },
-    //   });
-    //   listCtx.dispatchList({
-    //     type: "TASK_TEXT",
-    //     payload: "",
-    //   });
-    //   console.log(listCtx.storeTaskData);
-    // }
   };
 
   return (
@@ -133,19 +112,13 @@ const AddNewTask = ({ checkKey }) => {
           </div>
           <div>
             {homeCtx.storeTaskData.length === 0 ? (
-              <Button
-                disabled
-                variant="contained"
-                // color="primary"
-                className={classes.button}
-              >
+              <Button disabled variant="contained" className={classes.button}>
                 {" "}
                 Delete this workplace
               </Button>
             ) : (
               <OrangeButton
                 variant="contained"
-                // color=`${primary}`
                 className={classes.button}
                 onClick={(e) => {
                   e.preventDefault();

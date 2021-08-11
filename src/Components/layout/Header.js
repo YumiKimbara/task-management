@@ -3,7 +3,7 @@ import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import HomeContext from "../../Context/HomeContext";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { orange, blueGrey } from "@material-ui/core/colors";
+import { orange } from "@material-ui/core/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,13 +47,6 @@ const Header = ({ checkKey, setCheckKey }) => {
               className={classes.starRoundIcon}
               onClick={() => {
                 setCheckKey(!checkKey);
-                // listCtx.dispatchList({
-                //   type: "KEY_TASK_PAGE",
-                //   payload: true,
-                // });
-                // {
-                //   console.log(listCtx.keyTaskPage);
-                // }
               }}
             />
           ) : (
@@ -61,13 +54,6 @@ const Header = ({ checkKey, setCheckKey }) => {
               className={classes.starBorderRoundIcon}
               onClick={() => {
                 setCheckKey(!checkKey);
-                // listCtx.dispatchList({
-                //   type: "KEY_TASK_PAGE",
-                //   payload: true,
-                // });
-                // {
-                //   console.log(listCtx.keyTaskPage);
-                // }
               }}
             />
           )}

@@ -15,7 +15,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles({
   root: {
-    // minWidth: 275,
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
@@ -48,73 +47,11 @@ const TaskCard = ({ keyHandler, cardData }) => {
 
   const [key, setKey] = useState("");
 
-  // const changeToDone = (id, task, e) => {
-  //   console.log(id, task);
-  //   console.log(listCtx.storeTaskData);
-  //   const taskLeft = listCtx.storeTaskData.filter((cardInfo) => {
-  //     return cardInfo.id !== id;
-  //   });
-
-  //   console.log(taskLeft);
-  //   taskLeft.map((data) => {
-  //     listCtx.dispatchList({
-  //       type: "LEFT_TASK",
-  //       payload: {
-  //         taskLeft,
-  //       },
-  //     });
-  //     console.log(listCtx.leftTaskData);
-  //   });
-
-  //   if (e.target.checked === true) {
-  //     listCtx.dispatchList({
-  //       type: "DONE_TASK",
-  //       payload: {
-  //         id: id,
-  //         task: task,
-  //       },
-  //     });
-  //   }
-  //   console.log(e.target.value);
-  //   console.log(listCtx.leftTaskData);
-  //   console.log(listCtx.doneTaskData);
-  // };
-
   const changeToDone = (data, e) => {
     homeCtx.dispatchHome({
       type: "DONE_TASK",
       payload: data,
     });
-
-    // console.log(id, task);
-    // console.log(listCtx.storeTaskData);
-    // const taskLeft = listCtx.storeTaskData.filter((cardInfo) => {
-    //   return cardInfo.id !== id;
-    // });
-
-    // console.log(taskLeft);
-    // taskLeft.map((data) => {
-    //   listCtx.dispatchList({
-    //     type: "LEFT_TASK",
-    //     payload: {
-    //       taskLeft,
-    //     },
-    //   });
-    //   console.log(listCtx.leftTaskData);
-    // });
-
-    // if (e.target.checked === true) {
-    //   listCtx.dispatchList({
-    //     type: "DONE_TASK",
-    //     payload: {
-    //       id: id,
-    //       task: task,
-    //     },
-    //   });
-    // }
-    // console.log(e.target.value);
-    // console.log(listCtx.leftTaskData);
-    // console.log(listCtx.doneTaskData);
   };
   const changeToUnDone = (data, e) => {
     homeCtx.dispatchHome({
@@ -133,13 +70,6 @@ const TaskCard = ({ keyHandler, cardData }) => {
   };
 
   const deleteTask = (data) => {
-    console.log(data.id);
-    // console.log(
-    //   listCtx.storeTaskData.filter((data) => {
-    //     console.log(data.id);
-    //   })
-    // );
-
     homeCtx.dispatchHome({
       type: "DELETE_TASK",
       payload: data,
@@ -151,6 +81,7 @@ const TaskCard = ({ keyHandler, cardData }) => {
       {cardData &&
         cardData.map((data, i) => {
           return (
+            //keyはiではなく、idなどuniqueなものを使う。
             <div className={classes.root} key={data.id}>
               <Card className={classes.root}>
                 <CardContent className={classes.cardWords}>
@@ -167,7 +98,6 @@ const TaskCard = ({ keyHandler, cardData }) => {
                     id="task"
                     name="task"
                     onClick={(e) => {
-                      // changeToDone(data.id, data.task, e);
                       e.target.checked
                         ? changeToDone(data, e)
                         : changeToUnDone(data, e);
