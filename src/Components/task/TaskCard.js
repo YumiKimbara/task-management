@@ -27,6 +27,9 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  cardWords: {
+    wordBreak: "break-word",
+  },
 });
 
 const OrangeCheckbox = withStyles({
@@ -150,7 +153,7 @@ const TaskCard = ({ keyHandler, cardData }) => {
           return (
             <div className={classes.root} key={data.id}>
               <Card className={classes.root}>
-                <CardContent>
+                <CardContent className={classes.cardWords}>
                   <FormControlLabel
                     control={
                       //checkされているかどうかをisDone使って切り分ける。
