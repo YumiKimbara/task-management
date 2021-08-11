@@ -20,8 +20,8 @@ const useStyles = makeStyles(() =>
 
     starRoundIcon: {
       fontSize: "2rem",
-      color: "#fdc500",
       cursor: "pointer",
+      color: "#e5e5e5",
     },
 
     starBorderRoundIcon: {
