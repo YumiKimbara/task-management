@@ -3,19 +3,19 @@ import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import HomeContext from "../../Context/HomeContext";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { orange } from "@material-ui/core/colors";
+import { orange, blueGrey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
     headerContainer: {
       padding: "0 1.5rem",
       boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
-      color: "#484848",
+      color: "#e5e5e5",
       height: "70px",
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
-      // backgroundColor: orange[300],
+      backgroundColor: orange[900],
     },
 
     starRoundIcon: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles(() =>
     starBorderRoundIcon: {
       fontSize: "2rem",
       cursor: "pointer",
+      color: "#e5e5e5",
     },
   })
 );

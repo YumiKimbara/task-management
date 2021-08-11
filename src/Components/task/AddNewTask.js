@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) =>
       justifyContent: "space-around",
       alignItems: "center",
       marginBottom: "1rem",
+      color: "#484848",
     },
     addNameandButton: {
       display: "flex",
