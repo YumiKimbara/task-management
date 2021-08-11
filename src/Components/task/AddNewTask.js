@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       justifyContent: "space-around",
       alignItems: "center",
+      marginBottom: "1rem",
     },
     addNameandButton: {
       display: "flex",
@@ -39,10 +40,10 @@ const useStyles = makeStyles((theme) =>
 
 const OrangeButton = withStyles({
   root: {
-    backgroundColor: orange[800],
+    backgroundColor: orange[900],
     color: "white",
     "&:hover": {
-      backgroundColor: orange[800],
+      backgroundColor: orange[900],
       color: "white",
     },
   },
@@ -50,10 +51,10 @@ const OrangeButton = withStyles({
 
 const OrangeFab = withStyles({
   root: {
-    backgroundColor: orange[800],
+    backgroundColor: orange[900],
     color: "white",
     "&:hover": {
-      backgroundColor: orange[800],
+      backgroundColor: orange[900],
       color: "white",
     },
   },
@@ -62,7 +63,7 @@ const OrangeFab = withStyles({
 const OrangeTextField = withStyles({
   root: {
     "& .MuiInput-underline:after": {
-      borderBottomColor: orange[800],
+      borderBottomColor: orange[900],
     },
   },
 })((props) => <TextField color="default" {...props} />);
@@ -122,7 +123,6 @@ const AddNewTask = ({ checkKey }) => {
     // }
   };
 
-  const primary = orange[500];
   return (
     <>
       <div className={classes.addNewTaskContainer}>

@@ -6,12 +6,13 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() =>
   createStyles({
     sample: {
+      height: "calc(100vh - 70px)",
       display: "flex",
-      justifyContent: "space-between",
-      marginTop: "1rem",
-      marginLeft: "5rem",
-      marginRight: "5rem",
+      justifyContent: "top",
+      paddingLeft: "5rem",
+      paddingRight: "5rem",
       flexDirection: "column",
+      backgroundColor: "#e8e8e4",
     },
   })
 );

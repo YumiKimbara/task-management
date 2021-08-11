@@ -31,9 +31,9 @@ const useStyles = makeStyles({
 
 const OrangeCheckbox = withStyles({
   root: {
-    color: orange[400],
+    color: orange[700],
     "&$checked": {
-      color: orange[800],
+      color: orange[900],
     },
   },
   checked: {},
