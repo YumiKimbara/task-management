@@ -56,11 +56,9 @@ const TaskCard = ({ cardData, checkKey }) => {
       type: "UNDONE_TASK",
       payload: data,
     });
-    console.log(homeCtx.storeTaskData);
   };
 
   const changeToKeyTask = (data, isKeyTrue) => {
-    console.log(data, isKeyTrue);
     // if (e.target.checked) {
     homeCtx.dispatchHome({
       type: "KEY_TASK",
@@ -128,6 +126,7 @@ const TaskCard = ({ cardData, checkKey }) => {
                     control={
                       <Checkbox
                         onClick={(e) => {
+                          console.log(e.target.checked);
                           changeToKeyTask(data, e.target.checked);
 
                           // console.log(e.target.checked);

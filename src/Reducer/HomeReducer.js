@@ -83,7 +83,6 @@ const HomeReducer = (state, action) => {
       return {
         ...state,
         storeTaskData: state.storeTaskData.map((taskData) => {
-          console.log(action.payload.data.id);
           if (action.payload.data.id === taskData.id) {
             // 元々あるtaskDataのうち、isDoneだけ更新する。
             return { ...taskData, isKey: action.payload.key };

@@ -15,6 +15,11 @@ const KeyTask = ({ checkKey }) => {
   const homeCtx = useContext(HomeContext);
   const classes = useStyles();
 
+  const noKeyTask = homeCtx.storeTaskData.every((data) => {
+    return !data.isKey;
+  });
+  console.log(noKeyTask);
+
   // const [key, setKey] = useState("");
 
   // const keyHandler = (isKeyTask) => {
@@ -25,19 +30,17 @@ const KeyTask = ({ checkKey }) => {
   return (
     <>
       {console.log(homeCtx.storeTaskData)}
-      <div>
-        {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
-        {homeCtx.storeTaskData && (
-          <>
-            <h2 className={classes.keyTaskDone}>Key Task</h2>
-            <TaskCard
-              checkKey={checkKey}
-              // keyHandler={keyHandler}
-              cardData={homeCtx.storeTaskData.filter((item) => item.isKey)}
-            />
-          </>
-        )}
-      </div>
+      {homeCtx.storeTaskData && (
+        <div>
+          <h2 className={classes.keyTaskDone}>KEY TASK</h2>
+          <TaskCard
+            checkKey={checkKey}
+            // keyHandler={keyHandler}
+            cardData={homeCtx.storeTaskData.filter((item) => item.isKey)}
+          />
+        </div>
+      )}
+      {noKeyTask && <p>KEY TASK DOES'NT EXIST</p>}
     </>
   );
 };

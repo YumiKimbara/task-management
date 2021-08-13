@@ -100,7 +100,6 @@ const AddNewTask = ({ checkKey }) => {
         type: "TASK_TEXT",
         payload: "",
       });
-      console.log(homeCtx.storeTaskData);
     }
   };
 
@@ -109,7 +108,7 @@ const AddNewTask = ({ checkKey }) => {
       <div className={classes.addNewTaskContainer}>
         <div className={classes.addNameandButton}>
           <div className={classes.workspaceName}>
-            <h2>Create your task</h2>
+            <h2>CREATE YOUR TASK</h2>
           </div>
           <div>
             {homeCtx.storeTaskData.length === 0 ? (
@@ -137,7 +136,6 @@ const AddNewTask = ({ checkKey }) => {
         <form
           className={classes.root}
           onKeyDown={(e) => {
-            console.log(e.key);
             e.key === "Enter" && createTask();
           }}
           onSubmit={(e) => {

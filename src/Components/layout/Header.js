@@ -39,7 +39,7 @@ const Header = ({ checkKey, setCheckKey }) => {
     <>
       <div className={classes.headerContainer}>
         <div>
-          <h3>Task Management</h3>
+          <h3>TASK MANAGEMENT</h3>
         </div>
         <div>
           {checkKey ? (

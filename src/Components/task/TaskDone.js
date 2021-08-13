@@ -18,13 +18,11 @@ const TaskDone = () => {
   const checkDone =
     homeCtx.storeTaskData && homeCtx.storeTaskData.map((data) => data.isDone);
 
-  console.log(checkDone);
-
   return (
     <>
       {checkDone.includes(true) && (
         <div>
-          <h2 className={classes.taskDone}>Done</h2>
+          <h2 className={classes.taskDone}>DONE</h2>
           {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
           <TaskCard
             cardData={
