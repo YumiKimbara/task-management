@@ -92,6 +92,7 @@ const AddNewTask = ({ checkKey }) => {
           id: uuidv4(),
           task: homeCtx.taskText,
           isDone: false,
+          isKey: false,
         },
       });
 

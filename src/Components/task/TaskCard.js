@@ -41,7 +41,7 @@ const OrangeCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-const TaskCard = ({ keyHandler, cardData }) => {
+const TaskCard = ({ cardData, checkKey }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
@@ -64,7 +64,7 @@ const TaskCard = ({ keyHandler, cardData }) => {
     // if (e.target.checked) {
     homeCtx.dispatchHome({
       type: "KEY_TASK",
-      payload: { data, isKeyTrue },
+      payload: { data: data, key: isKeyTrue },
     });
     console.log(homeCtx.storeTaskData);
 
@@ -87,28 +87,30 @@ const TaskCard = ({ keyHandler, cardData }) => {
             <div className={classes.root} key={data.id}>
               <Card className={classes.root}>
                 <CardContent className={classes.cardWords}>
-                  <FormControlLabel
-                    control={
-                      //checkされているかどうかをisDone使って切り分ける。
-                      <OrangeCheckbox
-                        checked={data.isDone ? true : false}
-                        name="checkedB"
-                        id={data.id}
-                      />
-                    }
-                    type="checkbox"
-                    id="task"
-                    name="task"
-                    onClick={(e) => {
-                      e.target.checked
-                        ? changeToDone(data, e)
-                        : changeToUnDone(data, e);
-                    }}
-                  />
+                  {!checkKey && (
+                    <FormControlLabel
+                      control={
+                        //checkされているかどうかをisDone使って切り分ける。
+                        <OrangeCheckbox
+                          checked={data.isDone ? true : false}
+                          name="checkedB"
+                          id={data.id}
+                        />
+                      }
+                      type="checkbox"
+                      id="task"
+                      name="task"
+                      onClick={(e) => {
+                        e.target.checked
+                          ? changeToDone(data, e)
+                          : changeToUnDone(data, e);
+                      }}
+                    />
+                  )}
                   <label htmlFor="task">{data.task}</label>
                 </CardContent>
                 <CardActions>
-                  {data.isDone && (
+                  {data.isDone && !checkKey && (
                     <FormControlLabel
                       control={
                         <Checkbox

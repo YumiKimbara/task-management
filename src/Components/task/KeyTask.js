@@ -11,29 +11,32 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const KeyTask = () => {
+const KeyTask = ({ checkKey }) => {
   const homeCtx = useContext(HomeContext);
   const classes = useStyles();
-  const [key, setKey] = useState("");
 
-  const keyHandler = (isKeyTask) => {
-    console.log(isKeyTask);
-    setKey(isKeyTask);
-  };
+  // const [key, setKey] = useState("");
+
+  // const keyHandler = (isKeyTask) => {
+  //   console.log(isKeyTask);
+  //   setKey(isKeyTask);
+  // };
 
   return (
     <>
       {console.log(homeCtx.storeTaskData)}
       <div>
-        <h2 className={classes.keyTaskDone}>Key Task Done</h2>
         {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
-        <TaskCard
-          keyHandler={keyHandler}
-          cardData={
-            homeCtx.storeTaskData &&
-            homeCtx.storeTaskData.filter((item) => item.isKey)
-          }
-        />
+        {homeCtx.storeTaskData && (
+          <>
+            <h2 className={classes.keyTaskDone}>Key Task</h2>
+            <TaskCard
+              checkKey={checkKey}
+              // keyHandler={keyHandler}
+              cardData={homeCtx.storeTaskData.filter((item) => item.isKey)}
+            />
+          </>
+        )}
       </div>
     </>
   );

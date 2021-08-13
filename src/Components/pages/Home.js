@@ -9,9 +9,8 @@ const Home = ({ checkKey }) => {
 
   return (
     <>
-      {console.log(checkKey)}
-      <AddNewTask checkKey={checkKey} />
-      {checkKey ? <KeyTask /> : <TaskDone />}
+      {checkKey ? "" : <AddNewTask checkKey={checkKey} />}
+      {checkKey ? <KeyTask checkKey={checkKey} /> : <TaskDone />}
     </>
   );
 };
