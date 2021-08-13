@@ -8,6 +8,10 @@ const useStyles = makeStyles(() =>
     keyTaskDone: {
       color: "#484848",
     },
+    noKeyTaskMessage: {
+      textAlign: "center",
+      paddingTop: "10rem",
+    },
   })
 );
 
@@ -15,10 +19,11 @@ const KeyTask = ({ checkKey }) => {
   const homeCtx = useContext(HomeContext);
   const classes = useStyles();
 
-  const noKeyTask = homeCtx.storeTaskData.every((data) => {
-    return !data.isKey;
-  });
-  console.log(noKeyTask);
+  const noKeyTask =
+    homeCtx.storeTaskData &&
+    homeCtx.storeTaskData.every((data) => {
+      return !data.isKey;
+    });
 
   // const [key, setKey] = useState("");
 
@@ -40,7 +45,11 @@ const KeyTask = ({ checkKey }) => {
           />
         </div>
       )}
-      {noKeyTask && <p>KEY TASK DOES'NT EXIST</p>}
+      {noKeyTask && (
+        <div className={classes.noKeyTaskMessage}>
+          <p>KEY TASK DOES'NT EXIST</p>
+        </div>
+      )}
     </>
   );
 };
