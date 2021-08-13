@@ -45,8 +45,6 @@ const TaskCard = ({ keyHandler, cardData }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
-  const [key, setKey] = useState("");
-
   const changeToDone = (data, e) => {
     homeCtx.dispatchHome({
       type: "DONE_TASK",
@@ -58,15 +56,19 @@ const TaskCard = ({ keyHandler, cardData }) => {
       type: "UNDONE_TASK",
       payload: data,
     });
+    console.log(homeCtx.storeTaskData);
   };
 
-  const changeToKeyTask = (data, e) => {
-    if (e.target.checked) {
-      homeCtx.dispatchHome({
-        type: "KEY_TASK",
-        payload: data,
-      });
-    }
+  const changeToKeyTask = (data, isKeyTrue) => {
+    console.log(data, isKeyTrue);
+    // if (e.target.checked) {
+    homeCtx.dispatchHome({
+      type: "KEY_TASK",
+      payload: { data, isKeyTrue },
+    });
+    console.log(homeCtx.storeTaskData);
+
+    // }
   };
 
   const deleteTask = (data) => {
@@ -124,9 +126,10 @@ const TaskCard = ({ keyHandler, cardData }) => {
                     control={
                       <Checkbox
                         onClick={(e) => {
-                          console.log(e.target.checked);
-                          setKey(e.target.checked);
-                          keyHandler(key);
+                          changeToKeyTask(data, e.target.checked);
+
+                          // console.log(e.target.checked);
+                          // keyHandler(e.target.checked);
                         }}
                         icon={
                           data.isDone && !data.isKey ? (

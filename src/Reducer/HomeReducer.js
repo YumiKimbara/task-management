@@ -42,7 +42,6 @@ const HomeReducer = (state, action) => {
         ...state,
         //storeTaskData内に前回までのstateとaction.payloadを入れるようにする。
         storeTaskData: [...state.storeTaskData, action.payload],
-        isKey: false,
       };
     // case "LEFT_TASK":
     //   return {
@@ -86,7 +85,7 @@ const HomeReducer = (state, action) => {
         storeTaskData: state.storeTaskData.map((taskData) => {
           if (action.payload.id === taskData.id) {
             // 元々あるtaskDataのうち、isDoneだけ更新する。
-            return { ...taskData, isKey: true };
+            return { ...taskData, isKey: action.payload.isKey };
           }
           return taskData;
         }),
