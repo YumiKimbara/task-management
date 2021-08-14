@@ -4,6 +4,8 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import HomeContext from "../../Context/HomeContext";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(() =>
   createStyles({

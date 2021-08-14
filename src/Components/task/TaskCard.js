@@ -59,6 +59,7 @@ const TaskCard = ({ cardData, checkKey }) => {
   };
 
   const changeToKeyTask = (data, isKeyTrue) => {
+    console.log(isKeyTrue);
     // if (e.target.checked) {
     homeCtx.dispatchHome({
       type: "KEY_TASK",
@@ -122,34 +123,22 @@ const TaskCard = ({ cardData, checkKey }) => {
                       }
                     />
                   )}
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        onClick={(e) => {
-                          console.log(e.target.checked);
-                          changeToKeyTask(data, e.target.checked);
-
-                          // console.log(e.target.checked);
-                          // keyHandler(e.target.checked);
-                        }}
-                        icon={
-                          data.isDone && !data.isKey ? (
-                            <StarBorderRoundedIcon />
-                          ) : !data.isDone && !data.isKey ? (
-                            <StarBorderRoundedIcon />
-                          ) : data.isKey ? (
-                            <StarRoundedIcon style={{ color: "#fdc500" }} />
-                          ) : (
-                            ""
-                          )
-                        }
-                        checkedIcon={
-                          <StarRoundedIcon style={{ color: "#fdc500" }} />
-                        }
-                        name="checkedH"
-                      />
-                    }
-                  />
+                  {!data.isKey ? (
+                    <StarBorderRoundedIcon
+                      onClick={(e) => {
+                        console.log(e.target.checked);
+                        changeToKeyTask(data, true);
+                      }}
+                    />
+                  ) : (
+                    <StarRoundedIcon
+                      style={{ color: "#fdc500" }}
+                      onClick={(e) => {
+                        console.log(e.target.checked);
+                        changeToKeyTask(data, false);
+                      }}
+                    />
+                  )}
                 </CardActions>
               </Card>
             </div>

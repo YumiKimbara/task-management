@@ -19,6 +19,8 @@ const KeyTask = ({ checkKey }) => {
   const homeCtx = useContext(HomeContext);
   const classes = useStyles();
 
+  console.log(homeCtx.storeTaskData);
+
   const noKeyTask =
     homeCtx.storeTaskData &&
     homeCtx.storeTaskData.every((data) => {
