@@ -30,6 +30,13 @@ const useStyles = makeStyles({
   cardWords: {
     wordBreak: "break-word",
   },
+  StarBorderRoundedIcon: {
+    cursor: "pointer",
+  },
+  StarRoundedIcon: {
+    cursor: "pointer",
+    color: "#ffb703",
+  },
 });
 
 const OrangeCheckbox = withStyles({
@@ -119,13 +126,13 @@ const TaskCard = ({ cardData, checkKey }) => {
                           }}
                           icon={<DeleteIcon />}
                           name="checkedH"
-                          color=""
                         />
                       }
                     />
                   )}
                   {!data.isKey ? (
                     <StarBorderRoundedIcon
+                      className={classes.StarBorderRoundedIcon}
                       onClick={(e) => {
                         console.log(e.target.checked);
                         changeToKeyTask(data, true);
@@ -133,7 +140,7 @@ const TaskCard = ({ cardData, checkKey }) => {
                     />
                   ) : (
                     <StarRoundedIcon
-                      style={{ color: "#fdc500" }}
+                      className={classes.StarRoundedIcon}
                       onClick={(e) => {
                         console.log(e.target.checked);
                         changeToKeyTask(data, false);
