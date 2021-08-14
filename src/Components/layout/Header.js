@@ -11,13 +11,15 @@ const useStyles = makeStyles(() =>
   createStyles({
     headerContainer: {
       padding: "0 1.5rem",
-      boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
+      boxShadow: "0 0 20px rgba(0, 0, 0, 0.3)",
+      position: "relative",
       color: "#e5e5e5",
       height: "70px",
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
       backgroundColor: orange[900],
+      // backgroundColor: "salmon",
     },
 
     starRoundIcon: {

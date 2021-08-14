@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     margin: "0.5rem",
+    padding: "0 1rem",
   },
   title: {
     fontSize: 14,
