@@ -6,14 +6,14 @@ import classes from "./Confetti.module.css";
 import ReactCanvasConfetti from "react-canvas-confetti";
 
 const Confetti = ({ setConfetti }) => {
-  const [confetti, setConfetti] = useState({
+  const [showConfetti, setShowConfetti] = useState({
     fire: false,
     reset: false,
   });
 
   useEffect(() => {
     // set any value that is cast to the logical true and will differ from the previous one.
-    setConfetti({ fire: {} });
+    setShowConfetti({ fire: {} });
   }, []);
 
   setTimeout(() => {
@@ -33,7 +33,7 @@ const Confetti = ({ setConfetti }) => {
       <ReactCanvasConfetti
         angle={90}
         className={classes.style}
-        fire={confetti}
+        fire={showConfetti}
         colors={[
           "#26ccff",
           "#a25afd",

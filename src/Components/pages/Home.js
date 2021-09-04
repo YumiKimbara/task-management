@@ -9,15 +9,6 @@ import HomeContext from "../../Context/HomeContext";
 const Home = ({ checkKey }) => {
   const [confetti, setConfetti] = useState(false);
 
-  console.log(confetti);
-
-  const changeConfettiStatus = () => {
-    setConfetti(false);
-    return () => {
-      <Confetti />;
-    };
-  };
-
   return (
     <>
       {checkKey ? (
