@@ -11,7 +11,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const TaskDone = () => {
+const TaskDone = ({ setSample }) => {
   const homeCtx = useContext(HomeContext);
   const classes = useStyles();
 
@@ -25,6 +25,7 @@ const TaskDone = () => {
           <h2 className={classes.taskDone}>DONE</h2>
           {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
           <TaskCard
+            setSample={setSample}
             cardData={
               homeCtx.storeTaskData &&
               homeCtx.storeTaskData.filter((item) => item.isDone)

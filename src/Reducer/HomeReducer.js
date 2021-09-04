@@ -106,6 +106,8 @@ const HomeReducer = (state, action) => {
       return { ...state, taskText: action.payload };
     case "KEY_TASK_PAGE":
       return { ...state, keyTaskPage: false };
+    case "CONFETTI":
+      return { ...state, checkConfetti: true };
   }
 };
 

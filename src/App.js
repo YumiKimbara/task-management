@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Components/layout/Header";
 import Home from "./Components/pages/Home";
+import Confetti from "./Components/layout/Confetti";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>

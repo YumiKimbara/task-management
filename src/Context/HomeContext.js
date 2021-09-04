@@ -16,6 +16,7 @@ export const HomeContextProvider = (props) => {
     leftTaskData: [],
     doneTaskData: [],
     keyTaskPage: false,
+    checkConfetti: false,
   };
 
   const [state, dispatchHome] = useReducer(HomeReducer, initialState);
@@ -30,6 +31,7 @@ export const HomeContextProvider = (props) => {
         doneTaskData: state.doneTaskData,
         taskText: state.taskText,
         keyTaskPage: state.keyTaskPage,
+        checkConfetti: state.checkConfetti,
         dispatchHome: dispatchHome,
       }}
     >

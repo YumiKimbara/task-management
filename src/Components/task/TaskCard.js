@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import HomeContext from "../../Context/HomeContext";
+import Confetti from "../layout/Confetti";
 
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
@@ -49,7 +50,7 @@ const OrangeCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-const TaskCard = ({ cardData, checkKey }) => {
+const TaskCard = ({ cardData, checkKey, setSample }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
@@ -67,22 +68,28 @@ const TaskCard = ({ cardData, checkKey }) => {
   };
 
   const changeToKeyTask = (data, isKeyTrue) => {
-    console.log(isKeyTrue);
-    // if (e.target.checked) {
     homeCtx.dispatchHome({
       type: "KEY_TASK",
       payload: { data: data, key: isKeyTrue },
     });
-    console.log(homeCtx.storeTaskData);
-
-    // }
   };
 
-  const deleteTask = (data) => {
+  const deleteTask = (data, confettiTrue) => {
     homeCtx.dispatchHome({
       type: "DELETE_TASK",
       payload: data,
     });
+
+    if (homeCtx.storeTaskData.length === 1) {
+      setSample(true);
+      // homeCtx.dispatchHome({
+      //   type: "CONFETTI",
+      //   payload: { data: data, checkConfetti: confettiTrue },
+      // });
+    }
+
+    // console.log("hi", homeCtx.storeTaskData);
+    // homeCtx.storeTaskData.length === 1 && onClickFire();
   };
 
   return (
@@ -122,7 +129,7 @@ const TaskCard = ({ cardData, checkKey }) => {
                       control={
                         <Checkbox
                           onClick={(e) => {
-                            data.isDone && deleteTask(data);
+                            data.isDone && deleteTask(data, true);
                           }}
                           icon={<DeleteIcon />}
                           name="checkedH"
