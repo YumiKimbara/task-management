@@ -4,14 +4,28 @@ import KeyTask from "../task/KeyTask";
 import TaskDone from "../task/TaskDone";
 import Confetti from "../layout/Confetti";
 
-import { Modal, Backdrop } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-import HomeContext from "../../Context/HomeContext";
-import { mergeClasses } from "@material-ui/styles";
-
-import classes from "./Home.module.css";
+const useStyles = makeStyles(() =>
+  createStyles({
+    modalContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    modal: {
+      width: "35vw",
+      height: "35vh",
+      padding: "2rem",
+      backgroundColor: "aqua",
+      zIndex: "2",
+    },
+  })
+);
 
 const Home = ({ checkKey }) => {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [confetti, setConfetti] = useState(false);
 
