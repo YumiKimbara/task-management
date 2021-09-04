@@ -15,12 +15,15 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles({
+  cardContainer: {
+    display: "flex",
+    justifyContent: "center",
+    margin: "1rem 0",
+  },
   root: {
-    width: "100%",
+    width: "90%",
     display: "flex",
     justifyContent: "space-between",
-    margin: "0.5rem",
-    padding: "0 1rem",
   },
   title: {
     fontSize: 14,
@@ -50,7 +53,7 @@ const OrangeCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-const TaskCard = ({ cardData, checkKey, setConfetti }) => {
+const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
@@ -74,7 +77,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti }) => {
     });
   };
 
-  const deleteTask = (data, confettiTrue) => {
+  const deleteTask = (data) => {
     homeCtx.dispatchHome({
       type: "DELETE_TASK",
       payload: data,
@@ -82,6 +85,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti }) => {
 
     if (homeCtx.storeTaskData.length === 1) {
       setConfetti(true);
+      setOpen(true);
       // homeCtx.dispatchHome({
       //   type: "CONFETTI",
       //   payload: { data: data, checkConfetti: confettiTrue },
@@ -98,7 +102,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti }) => {
         cardData.map((data, i) => {
           return (
             //keyはiではなく、idなどuniqueなものを使う。
-            <div className={classes.root} key={data.id}>
+            <div className={classes.cardContainer} key={data.id}>
               <Card className={classes.root}>
                 <CardContent className={classes.cardWords}>
                   {!checkKey && (

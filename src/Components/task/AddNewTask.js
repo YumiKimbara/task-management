@@ -18,11 +18,8 @@ const useStyles = makeStyles((theme) =>
     button: {
       fontSize: "0.7rem",
     },
-    textFieldContainer: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
+    addContainer: {
+      padding: "0 2rem",
     },
     workspaceName: {
       display: "flex",
@@ -69,7 +66,7 @@ const OrangeTextField = withStyles({
   },
 })((props) => <TextField color="default" {...props} />);
 
-const AddNewTask = ({ checkKey, setConfetti }) => {
+const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
@@ -105,7 +102,7 @@ const AddNewTask = ({ checkKey, setConfetti }) => {
 
   return (
     <>
-      <div className={classes.addNewTaskContainer}>
+      <div className={classes.addContainer}>
         <div className={classes.addNameandButton}>
           <div className={classes.workspaceName}>
             <h2>CREATE YOUR TASK</h2>
@@ -196,6 +193,7 @@ const AddNewTask = ({ checkKey, setConfetti }) => {
               : ""
           }
           setConfetti={setConfetti}
+          setOpen={setOpen}
         />
       </div>
     </>

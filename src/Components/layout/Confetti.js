@@ -58,7 +58,7 @@ const Confetti = ({ setConfetti }) => {
         startVelocity={70}
         ticks={600}
         useWorker
-        zIndex={1000}
+        zIndex={-1}
       />
     </>
   );

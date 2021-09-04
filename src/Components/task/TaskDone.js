@@ -7,11 +7,12 @@ const useStyles = makeStyles(() =>
   createStyles({
     taskDone: {
       color: "#484848",
+      padding: "0 2rem",
     },
   })
 );
 
-const TaskDone = ({ setConfetti }) => {
+const TaskDone = ({ setConfetti, setOpen }) => {
   const homeCtx = useContext(HomeContext);
   const classes = useStyles();
 
@@ -26,6 +27,7 @@ const TaskDone = ({ setConfetti }) => {
           {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
           <TaskCard
             setConfetti={setConfetti}
+            setOpen={setOpen}
             cardData={
               homeCtx.storeTaskData &&
               homeCtx.storeTaskData.filter((item) => item.isDone)

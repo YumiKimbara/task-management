@@ -7,6 +7,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     keyTaskDone: {
       color: "#484848",
+      padding: "0 2rem",
     },
     noKeyTaskMessage: {
       textAlign: "center",
