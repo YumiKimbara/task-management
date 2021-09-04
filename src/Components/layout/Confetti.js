@@ -5,7 +5,7 @@ import classes from "./Confetti.module.css";
 
 import ReactCanvasConfetti from "react-canvas-confetti";
 
-const Confetti = ({ setSample }) => {
+const Confetti = ({ setConfetti }) => {
   const [confetti, setConfetti] = useState({
     fire: false,
     reset: false,
@@ -17,7 +17,7 @@ const Confetti = ({ setSample }) => {
   }, []);
 
   setTimeout(() => {
-    setSample(false);
+    setConfetti(false);
   }, 3000);
 
   //   const onClickFire = () => {

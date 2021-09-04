@@ -69,7 +69,7 @@ const OrangeTextField = withStyles({
   },
 })((props) => <TextField color="default" {...props} />);
 
-const AddNewTask = ({ checkKey, setSample }) => {
+const AddNewTask = ({ checkKey, setConfetti }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
@@ -195,7 +195,7 @@ const AddNewTask = ({ checkKey, setSample }) => {
                 )
               : ""
           }
-          setSample={setSample}
+          setConfetti={setConfetti}
         />
       </div>
     </>

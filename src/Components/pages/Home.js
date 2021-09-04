@@ -7,12 +7,12 @@ import Confetti from "../layout/Confetti";
 import HomeContext from "../../Context/HomeContext";
 
 const Home = ({ checkKey }) => {
-  const [sample, setSample] = useState(false);
+  const [confetti, setConfetti] = useState(false);
 
-  console.log(sample);
+  console.log(confetti);
 
   const changeConfettiStatus = () => {
-    setSample(false);
+    setConfetti(false);
     return () => {
       <Confetti />;
     };
@@ -20,13 +20,17 @@ const Home = ({ checkKey }) => {
 
   return (
     <>
-      {checkKey ? "" : <AddNewTask checkKey={checkKey} setSample={setSample} />}
+      {checkKey ? (
+        ""
+      ) : (
+        <AddNewTask checkKey={checkKey} setConfetti={setConfetti} />
+      )}
       {checkKey ? (
         <KeyTask checkKey={checkKey} />
       ) : (
-        <TaskDone setSample={setSample} />
+        <TaskDone setConfetti={setConfetti} />
       )}
-      {sample && <Confetti setSample={setSample} />}
+      {confetti && <Confetti setConfetti={setConfetti} />}
     </>
   );
 };

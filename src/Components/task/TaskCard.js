@@ -50,7 +50,7 @@ const OrangeCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-const TaskCard = ({ cardData, checkKey, setSample }) => {
+const TaskCard = ({ cardData, checkKey, setConfetti }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
@@ -81,7 +81,7 @@ const TaskCard = ({ cardData, checkKey, setSample }) => {
     });
 
     if (homeCtx.storeTaskData.length === 1) {
-      setSample(true);
+      setConfetti(true);
       // homeCtx.dispatchHome({
       //   type: "CONFETTI",
       //   payload: { data: data, checkConfetti: confettiTrue },
