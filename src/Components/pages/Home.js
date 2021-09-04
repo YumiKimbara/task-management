@@ -4,8 +4,9 @@ import KeyTask from "../task/KeyTask";
 import TaskDone from "../task/TaskDone";
 import Confetti from "../layout/Confetti";
 
-import { Modal } from "@material-ui/core";
+import { Modal, Button } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { orange } from "@material-ui/core/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -18,8 +19,25 @@ const useStyles = makeStyles(() =>
       width: "35vw",
       height: "35vh",
       padding: "2rem",
-      backgroundColor: "aqua",
+      backgroundColor: "#f0efeb",
       zIndex: "2",
+      borderRadius: "10px",
+      textAlign: "center",
+      position: "relative",
+    },
+    msg: {
+      fontSize: "1.4rem",
+      margin: "0",
+    },
+    button: {
+      background: orange[900],
+      color: "white",
+      fontWeight: "bold",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translateY(150%) translateX(-50%)",
+      margin: "auto",
     },
   })
 );
@@ -32,8 +50,6 @@ const Home = ({ checkKey }) => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  console.log(confetti);
 
   return (
     <>
@@ -56,7 +72,19 @@ const Home = ({ checkKey }) => {
         onClose={handleClose}
         className={classes.modalContainer}
       >
-        <p className={classes.modal}>Congrats🥳 You completed all task(s)</p>
+        <div className={classes.modal}>
+          <p className={classes.msg}>Congrats🥳</p>
+          <p className={classes.msg}>You completed all task(s)</p>
+          <Button
+            className={classes.button}
+            variant="contained"
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            Close
+          </Button>
+        </div>
       </Modal>
       {confetti && <Confetti setConfetti={setConfetti} />}
     </>
