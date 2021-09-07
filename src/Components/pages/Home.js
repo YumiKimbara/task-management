@@ -8,7 +8,7 @@ import { Modal, Button } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     modalContainer: {
       display: "flex",
@@ -16,8 +16,8 @@ const useStyles = makeStyles(() =>
       alignItems: "center",
     },
     modal: {
-      width: "35vw",
-      height: "35vh",
+      width: "30vw",
+      height: "30vh",
       padding: "2rem",
       backgroundColor: "#f0efeb",
       zIndex: "2",
@@ -28,10 +28,19 @@ const useStyles = makeStyles(() =>
       flexDirection: "column",
       justifyContent: "center",
       opacity: "0.8",
+      [theme.breakpoints.down("md")]: {
+        height: "25vh",
+      },
+      [theme.breakpoints.down("sm")]: {
+        height: "20vh",
+      },
     },
     msg: {
       fontSize: "1.4rem",
       margin: "0",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "1rem",
+      },
     },
     button: {
       background: orange[900],
@@ -44,6 +53,9 @@ const useStyles = makeStyles(() =>
       margin: "auto",
       "&:hover": {
         backgroundColor: orange[900],
+      },
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "0.5rem",
       },
     },
   })
