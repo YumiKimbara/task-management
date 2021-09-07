@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+
 import AddNewTask from "../task/AddNewTask";
 import KeyTask from "../task/KeyTask";
 import TaskDone from "../task/TaskDone";
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) =>
       flexDirection: "column",
       justifyContent: "center",
       opacity: "0.8",
+      //mobile version
       [theme.breakpoints.down("md")]: {
         height: "25vh",
       },
@@ -38,6 +40,7 @@ const useStyles = makeStyles((theme) =>
     msg: {
       fontSize: "1.4rem",
       margin: "0",
+      //mobile version
       [theme.breakpoints.down("sm")]: {
         fontSize: "1rem",
       },
@@ -54,6 +57,7 @@ const useStyles = makeStyles((theme) =>
       "&:hover": {
         backgroundColor: orange[900],
       },
+      //mobile version
       [theme.breakpoints.down("sm")]: {
         fontSize: "0.5rem",
       },

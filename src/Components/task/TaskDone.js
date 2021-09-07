@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import HomeContext from "../../Context/HomeContext";
+
 import TaskCard from "./TaskCard";
+
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) =>
@@ -9,6 +11,7 @@ const useStyles = makeStyles((theme) =>
       color: "#484848",
       padding: "0 2rem",
       paddingTop: "1rem",
+      //mobile version
       [theme.breakpoints.down("sm")]: {
         fontSize: "20px",
       },
@@ -28,7 +31,6 @@ const TaskDone = ({ setConfetti, setOpen }) => {
       {checkDone.includes(true) && (
         <div>
           <h2 className={classes.taskDone}>DONE</h2>
-          {/* <TaskCard cardData={listCtx.doneTaskData} /> */}
           <TaskCard
             setConfetti={setConfetti}
             setOpen={setOpen}

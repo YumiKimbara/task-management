@@ -1,4 +1,3 @@
-import { Home } from "@material-ui/core";
 import React, { useReducer } from "react";
 import HomeReducer from "../Reducer/HomeReducer";
 
@@ -9,12 +8,9 @@ export const HomeContextProvider = (props) => {
   const jsonTask = JSON.parse(storedTask);
 
   const initialState = {
-    addTask: false,
-    deleteTask: false,
+    //if task is stored in the local strage, show them
     storeTaskData: jsonTask ? jsonTask : [],
     taskText: "",
-    leftTaskData: [],
-    doneTaskData: [],
     keyTaskPage: false,
     checkConfetti: false,
   };
@@ -24,11 +20,7 @@ export const HomeContextProvider = (props) => {
   return (
     <HomeContext.Provider
       value={{
-        addTask: state.addTask,
-        deleteTask: state.deleteTask,
         storeTaskData: state.storeTaskData,
-        leftTaskData: state.leftTaskData,
-        doneTaskData: state.doneTaskData,
         taskText: state.taskText,
         keyTaskPage: state.keyTaskPage,
         checkConfetti: state.checkConfetti,

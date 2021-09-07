@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+
 import Home from "../Components/pages/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "../Components/layout/Header";
 import Home from "../Components/pages/Home";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>

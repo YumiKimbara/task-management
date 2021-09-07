@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+
 import Header from "./Components/layout/Header";
 import Home from "./Components/pages/Home";
+
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>
@@ -9,8 +11,6 @@ const useStyles = makeStyles(() =>
       minHeight: "calc(100vh - 130px)",
       display: "flex",
       justifyContent: "top",
-      // paddingLeft: "5rem",
-      // paddingRight: "5rem",
       paddingTop: "30px",
       paddingBottom: "30px",
       flexDirection: "column",

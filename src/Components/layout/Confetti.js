@@ -20,22 +20,15 @@ const Confetti = ({ setConfetti }) => {
     reset: false,
   });
 
+  //excute confetti
   useEffect(() => {
-    // set any value that is cast to the logical true and will differ from the previous one.
     setShowConfetti({ fire: {} });
   }, []);
 
+  //delete confetti after 3 seconds
   setTimeout(() => {
     setConfetti(false);
   }, 3000);
-
-  //   const onClickFire = () => {
-  //     console.log("confetti");
-  //     // set any value that is cast to the logical true and will differ from the previous one.
-  //     setConfetti({ fire: {} });
-  //   };
-
-  //   onClickFire();
 
   return (
     <>
@@ -67,7 +60,6 @@ const Confetti = ({ setConfetti }) => {
         startVelocity={100}
         ticks={600}
         useWorker
-        // zIndex={-1}
       />
     </>
   );

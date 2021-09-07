@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
+
+import HomeContext from "../../Context/HomeContext";
+
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
-import HomeContext from "../../Context/HomeContext";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -19,7 +19,6 @@ const useStyles = makeStyles(() =>
       justifyContent: "space-between",
       alignItems: "center",
       backgroundColor: orange[900],
-      // backgroundColor: "salmon",
     },
 
     starRoundIcon: {
@@ -38,7 +37,6 @@ const useStyles = makeStyles(() =>
 
 const Header = ({ checkKey, setCheckKey }) => {
   const classes = useStyles();
-  const homeCtx = useContext(HomeContext);
   return (
     <>
       <div className={classes.headerContainer}>

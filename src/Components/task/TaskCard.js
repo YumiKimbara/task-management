@@ -1,14 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import HomeContext from "../../Context/HomeContext";
-import Confetti from "../layout/Confetti";
 
 import { makeStyles, createStyles, withStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) =>
     },
     cardWords: {
       wordBreak: "break-word",
+      //mobile version
       [theme.breakpoints.down("sm")]: {
         padding: "8px",
       },
@@ -62,13 +64,13 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
 
-  const changeToDone = (data, e) => {
+  const changeToDone = (data) => {
     homeCtx.dispatchHome({
       type: "DONE_TASK",
       payload: data,
     });
   };
-  const changeToUnDone = (data, e) => {
+  const changeToUnDone = (data) => {
     homeCtx.dispatchHome({
       type: "UNDONE_TASK",
       payload: data,
@@ -91,14 +93,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
     if (homeCtx.storeTaskData.length === 1) {
       setConfetti(true);
       setOpen(true);
-      // homeCtx.dispatchHome({
-      //   type: "CONFETTI",
-      //   payload: { data: data, checkConfetti: confettiTrue },
-      // });
     }
-
-    // console.log("hi", homeCtx.storeTaskData);
-    // homeCtx.storeTaskData.length === 1 && onClickFire();
   };
 
   return (
@@ -106,14 +101,13 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
       {cardData &&
         cardData.map((data, i) => {
           return (
-            //keyはiではなく、idなどuniqueなものを使う。
             <div className={classes.cardContainer} key={data.id}>
               <Card className={classes.root}>
                 <CardContent className={classes.cardWords}>
                   {!checkKey && (
                     <FormControlLabel
                       control={
-                        //checkされているかどうかをisDone使って切り分ける。
+                        //if task is done, check the checkbox
                         <OrangeCheckbox
                           checked={data.isDone ? true : false}
                           name="checkedB"

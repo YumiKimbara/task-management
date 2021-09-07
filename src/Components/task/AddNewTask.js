@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) =>
     },
     button: {
       fontSize: "0.7rem",
+      //mobile version
       [theme.breakpoints.down("sm")]: {
         fontSize: "0.6rem",
       },
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) =>
       marginBottom: "1rem",
       color: "#484848",
       "& h2": {
+        //mobile version
         [theme.breakpoints.down("sm")]: {
           fontSize: "20px",
         },
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme) =>
       alignItems: "center",
     },
     addButton: {
+      //mobile version
       [theme.breakpoints.down("sm")]: {
         width: "40px",
         height: "15px",
@@ -87,16 +90,19 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
 
   const [error, setError] = useState(false);
 
+  // when task cards changed, set card's info to local strage
   useEffect(() => {
     localStorage.setItem("task", JSON.stringify(homeCtx.storeTaskData));
   }, [homeCtx.storeTaskData]);
 
   const createTask = () => {
+    //if text in the input is empty, show error message
     if (homeCtx.taskText.trim() === "") {
       setError(true);
       return;
     }
 
+    //if text in the input is not empty, store task with context API
     if (homeCtx.taskText.trim() !== "") {
       homeCtx.dispatchHome({
         type: "STORE_TASK",
@@ -199,6 +205,8 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
       <div className={classes.card}>
         <TaskCard
           cardData={
+            //if there is a task card, and key is not checked, show task card which is not done and key is not checkd
+            //if there is a task card, and key is checked, show task card which is not done and key is checked.
             homeCtx.storeTaskData && !checkKey
               ? homeCtx.storeTaskData.filter((item) => !item.isDone)
               : homeCtx.keyTaskPage

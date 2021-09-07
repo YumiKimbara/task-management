@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-//import AppRouter from "./Router/Router";
 import App from "./App";
 import { HomeContextProvider } from "./Context/HomeContext";
 
