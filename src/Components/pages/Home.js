@@ -59,6 +59,8 @@ const Home = ({ checkKey }) => {
 
   return (
     <>
+      {confetti && <Confetti setConfetti={setConfetti} />}
+
       {checkKey ? (
         ""
       ) : (
@@ -92,7 +94,6 @@ const Home = ({ checkKey }) => {
           </Button>
         </div>
       </Modal>
-      {confetti && <Confetti setConfetti={setConfetti} />}
     </>
   );
 };

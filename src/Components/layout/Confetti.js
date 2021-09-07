@@ -50,15 +50,15 @@ const Confetti = ({ setConfetti }) => {
           x: 0.5,
           y: 0.5,
         }}
-        particleCount={774}
+        particleCount={1000}
         resize
         scalar={1}
         shapes={["circle", "square"]}
         spread={360}
-        startVelocity={70}
+        startVelocity={100}
         ticks={600}
         useWorker
-        zIndex={-1}
+        // zIndex={-1}
       />
     </>
   );
