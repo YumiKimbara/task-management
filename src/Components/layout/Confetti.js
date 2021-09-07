@@ -1,11 +1,20 @@
-import { useEffect, useState, useContext } from "react";
-import HomeContext from "../../Context/HomeContext";
-
-import classes from "./Confetti.module.css";
+import { useEffect, useState } from "react";
 
 import ReactCanvasConfetti from "react-canvas-confetti";
 
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    confettiWrapper: {
+      width: "100%",
+      minHeight: "100vh",
+    },
+  })
+);
+
 const Confetti = ({ setConfetti }) => {
+  const classes = useStyles();
   const [showConfetti, setShowConfetti] = useState({
     fire: false,
     reset: false,
