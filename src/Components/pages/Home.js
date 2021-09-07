@@ -24,6 +24,9 @@ const useStyles = makeStyles(() =>
       borderRadius: "10px",
       textAlign: "center",
       position: "relative",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
     },
     msg: {
       fontSize: "1.4rem",
@@ -34,10 +37,13 @@ const useStyles = makeStyles(() =>
       color: "white",
       fontWeight: "bold",
       position: "absolute",
-      top: "50%",
+      bottom: "30%",
       left: "50%",
       transform: "translateY(150%) translateX(-50%)",
       margin: "auto",
+      "&:hover": {
+        backgroundColor: orange[900],
+      },
     },
   })
 );

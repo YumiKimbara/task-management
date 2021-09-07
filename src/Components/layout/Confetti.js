@@ -32,7 +32,7 @@ const Confetti = ({ setConfetti }) => {
     <>
       <ReactCanvasConfetti
         angle={90}
-        className={classes.style}
+        className={classes.confettiWrapper}
         fire={showConfetti}
         colors={[
           "#26ccff",
