@@ -63,7 +63,7 @@ const OrangeButton = withStyles({
       color: "white",
     },
   },
-})((props) => <Button color="default" {...props} />);
+})((props) => <Button {...props} />);
 
 const OrangeFab = withStyles({
   root: {
@@ -74,7 +74,7 @@ const OrangeFab = withStyles({
       color: "white",
     },
   },
-})((props) => <Fab color="default" {...props} />);
+})((props) => <Fab {...props} />);
 
 const OrangeTextField = withStyles({
   root: {
@@ -82,7 +82,7 @@ const OrangeTextField = withStyles({
       borderBottomColor: orange[900],
     },
   },
-})((props) => <TextField color="default" {...props} />);
+})((props) => <TextField {...props} />);
 
 const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
   const classes = useStyles();
