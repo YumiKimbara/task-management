@@ -3,11 +3,15 @@ import HomeContext from "../../Context/HomeContext";
 import TaskCard from "./TaskCard";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     taskDone: {
       color: "#484848",
       padding: "0 2rem",
+      paddingTop: "1rem",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "20px",
+      },
     },
   })
 );

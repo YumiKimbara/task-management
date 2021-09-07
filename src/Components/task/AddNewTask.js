@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) =>
     },
     button: {
       fontSize: "0.7rem",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "0.5rem",
+      },
     },
     addContainer: {
       padding: "0 2rem",
@@ -27,11 +30,22 @@ const useStyles = makeStyles((theme) =>
       alignItems: "center",
       marginBottom: "1rem",
       color: "#484848",
+      "& h2": {
+        [theme.breakpoints.down("sm")]: {
+          fontSize: "20px",
+        },
+      },
     },
     addNameandButton: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+    },
+    addButton: {
+      [theme.breakpoints.down("sm")]: {
+        width: "40px",
+        height: "15px",
+      },
     },
   })
 );
@@ -142,7 +156,7 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
           <OrangeFab
             size="small"
             aria-label="add"
-            className={classes.margin}
+            className={classes.addButton}
             onClick={createTask}
           >
             <AddIcon />

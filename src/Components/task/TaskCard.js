@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import HomeContext from "../../Context/HomeContext";
 import Confetti from "../layout/Confetti";
 
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, withStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -14,34 +14,39 @@ import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-const useStyles = makeStyles({
-  cardContainer: {
-    display: "flex",
-    justifyContent: "center",
-    margin: "1rem 0",
-  },
-  root: {
-    width: "90%",
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  cardWords: {
-    wordBreak: "break-word",
-  },
-  StarBorderRoundedIcon: {
-    cursor: "pointer",
-  },
-  StarRoundedIcon: {
-    cursor: "pointer",
-    color: "#ffb703",
-  },
-});
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    cardContainer: {
+      display: "flex",
+      justifyContent: "center",
+      margin: "1rem 0",
+    },
+    root: {
+      width: "90%",
+      display: "flex",
+      justifyContent: "space-between",
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+    cardWords: {
+      wordBreak: "break-word",
+      [theme.breakpoints.down("sm")]: {
+        padding: "8px",
+      },
+    },
+    StarBorderRoundedIcon: {
+      cursor: "pointer",
+    },
+    StarRoundedIcon: {
+      cursor: "pointer",
+      color: "#ffb703",
+    },
+  })
+);
 
 const OrangeCheckbox = withStyles({
   root: {
