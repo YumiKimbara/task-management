@@ -1,13 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import HomeContext from "../../Context/HomeContext";
+
+import TaskCard from "./TaskCard";
+
 import { v4 as uuidv4 } from "uuid";
+
 import { createStyles, makeStyles, withStyles } from "@material-ui/core/styles";
 import { orange } from "@material-ui/core/colors";
-import Button from "@material-ui/core/Button";
-import TaskCard from "./TaskCard";
-import TextField from "@material-ui/core/TextField";
+import { Button, TextField, Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

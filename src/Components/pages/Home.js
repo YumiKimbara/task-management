@@ -27,6 +27,7 @@ const useStyles = makeStyles(() =>
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
+      opacity: "0.8",
     },
     msg: {
       fontSize: "1.4rem",
