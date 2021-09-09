@@ -97,32 +97,15 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   };
 
   const editTask = (data, isEditTrue) => {
-    // if (editText === "") return;
+    setChangeEdit(!changeEdit);
 
-    console.log("editText", editText);
-
-    console.log("data", { ...data, task: editText });
+    if (!editText) return;
 
     homeCtx.dispatchHome({
       type: "EDIT_TASK",
       payload: { data: { ...data, task: editText }, edit: isEditTrue },
     });
-    // console.log(editId);
-    setChangeEdit(!changeEdit);
-    console.log("changeEdit", changeEdit);
-
-    // homeCtx.dispatchHome({
-    //   type: "STORE_TASK",
-    //   payload: {
-    //     id: uuidv4(),
-    //     // task: homeCtx.taskText,
-    //     task: editText,
-    //     isDone: false,
-    //     isKey: false,
-    //   },
-    // });
   };
-  console.log("storeTaskData", homeCtx.storeTaskData);
 
   const deleteTask = (data) => {
     homeCtx.dispatchHome({
@@ -140,9 +123,6 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
     <>
       {cardData &&
         cardData.map((data, i) => {
-          console.log("cardData", cardData);
-
-          //carddata[i] === clicked id then edit the text
           return (
             <div className={classes.cardContainer} key={data.id}>
               <Card className={classes.root}>
@@ -168,36 +148,19 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                     />
                   )}
                   {!changeEdit && <label htmlFor="task">{data.task}</label>}
-
+                  {changeEdit && cardData[i].id !== editId && (
+                    <label htmlFor="task">{data.task}</label>
+                  )}
                   {changeEdit && cardData[i].id === editId && (
                     <input
-                      id="editText"
                       type="text"
-                      value={editText}
                       onChange={(e) => {
                         if (cardData[i]) {
                           setEditText(e.target.value);
+                          console.log(editText);
                         }
-
-                        console.log("editText", editText);
-                        //setError(false);
-                        // homeCtx.dispatchHome({
-                        //   type: "TASK_TEXT",
-                        //   payload: e.target.value,
-                        // });
-                        // console.log("data.task", homeCtx.taskText);
-                        // if (homeCtx.taskText.trim() !== "") {
-                        //   homeCtx.dispatchHome({
-                        //     type: "STORE_TASK",
-                        //     payload: {
-                        //       id: uuidv4(),
-                        //       task: homeCtx.taskText,
-                        //       isDone: false,
-                        //       isKey: false,
-                        //     },
-                        //   });
-                        // }
                       }}
+                      value={editText}
                     />
                   )}
                 </CardContent>
@@ -224,7 +187,9 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                             // }
                             // if (e.target.checked) {
                             setEditId(cardData[i].id);
-                            editTask(data, true);
+                            changeEdit
+                              ? editTask(data, true)
+                              : editTask(data, false);
                             // }
                           }}
                           icon={<EditIcon />}
@@ -237,7 +202,6 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                     <StarBorderRoundedIcon
                       className={classes.StarBorderRoundedIcon}
                       onClick={(e) => {
-                        console.log(e.target.checked);
                         changeToKeyTask(data, true);
                       }}
                     />
@@ -245,7 +209,6 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                     <StarRoundedIcon
                       className={classes.StarRoundedIcon}
                       onClick={(e) => {
-                        console.log(e.target.checked);
                         changeToKeyTask(data, false);
                       }}
                     />
