@@ -58,6 +58,21 @@ const HomeReducer = (state, action) => {
       return { ...state, taskText: action.payload };
     case "CONFETTI":
       return { ...state, checkConfetti: true };
+    case "EDIT_TASK":
+      return {
+        ...state,
+        storeTaskData: state.storeTaskData.map((taskData) => {
+          if (action.payload.data.id === taskData.id) {
+            // return previous task data. also update isKey part
+            return {
+              ...taskData,
+              task: action.payload.data.task,
+              isEdit: action.payload.edit,
+            };
+          }
+          return taskData;
+        }),
+      };
   }
 };
 
