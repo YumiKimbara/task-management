@@ -111,6 +111,7 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
           task: homeCtx.taskText,
           isDone: false,
           isKey: false,
+          toggleEdit: true,
         },
       });
 

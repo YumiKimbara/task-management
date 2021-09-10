@@ -73,6 +73,30 @@ const HomeReducer = (state, action) => {
           return taskData;
         }),
       };
+    case "SHOW_EDIT":
+      return {
+        ...state,
+        storeTaskData: state.storeTaskData.map((taskData) => {
+          if (action.payload.id !== taskData.id) {
+            // return previous task data. also update toggleEdit part
+            return { ...taskData, toggleEdit: true };
+          }
+
+          return taskData;
+        }),
+      };
+    case "HIDE_EDIT":
+      return {
+        ...state,
+        storeTaskData: state.storeTaskData.map((taskData) => {
+          if (action.payload.id !== taskData.id) {
+            // return previous task data. also update toggleEdit part
+            return { ...taskData, toggleEdit: false };
+          }
+
+          return taskData;
+        }),
+      };
   }
 };
 

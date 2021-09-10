@@ -11,8 +11,6 @@ import {
   Checkbox,
 } from "@material-ui/core";
 
-import { v4 as uuidv4 } from "uuid";
-
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -73,8 +71,11 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   const classes = useStyles();
   const homeCtx = useContext(HomeContext);
   const [changeEdit, setChangeEdit] = useState(false);
-  const [editText, setEditText] = useState("");
-  const [editId, setEditId] = useState("");
+  const [editText, setEditText] = useState();
+  const [editId, setEditId] = useState();
+  const [editing, setEditing] = useState(true);
+  const [notEditing, setNotEditing] = useState("");
+  const [notEditingData, setNotEditingData] = useState("");
 
   const changeToDone = (data) => {
     homeCtx.dispatchHome({
@@ -119,10 +120,37 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
     }
   };
 
+  const showEditButton = (data) => {
+    homeCtx.dispatchHome({
+      type: "SHOW_EDIT",
+      payload: data,
+    });
+  };
+
+  const hideEditButton = (data) => {
+    homeCtx.dispatchHome({
+      type: "HIDE_EDIT",
+      payload: data,
+    });
+  };
+
+  const checkEditing = (id) => {
+    const unClikedEditButton = cardData.filter((item) => {
+      return item.id !== id;
+    });
+    const unClikedEditId = unClikedEditButton.map((item, i) => {
+      return item.id;
+    });
+
+    setNotEditing(unClikedEditId);
+  };
+
   return (
     <>
       {cardData &&
         cardData.map((data, i) => {
+          console.log("data", data);
+
           return (
             <div className={classes.cardContainer} key={data.id}>
               <Card className={classes.root}>
@@ -154,13 +182,13 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                   {changeEdit && cardData[i].id === editId && (
                     <input
                       type="text"
-                      onChange={(e) => {
-                        if (cardData[i]) {
-                          setEditText(e.target.value);
-                          console.log(editText);
-                        }
-                      }}
+                      // onChange={(e) => {
+                      //   if (cardData[i]) {
+                      //     setEditText(e.target.value);
+                      //   }
+                      // }}
                       value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
                     />
                   )}
                 </CardContent>
@@ -181,18 +209,35 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          disabled={
+                            notEditing.includes(cardData[i].id) &&
+                            !data.toggleEdit
+                              ? true
+                              : false
+                          }
                           onClick={(e) => {
-                            // if (e.target === cardData[i]) {
-                            //   console.log("same card");
-                            // }
-                            // if (e.target.checked) {
+                            checkEditing(data.id);
+                            setEditing(!editing);
+                            e.target.checked
+                              ? hideEditButton(data)
+                              : showEditButton(data);
+
                             setEditId(cardData[i].id);
+
                             changeEdit
                               ? editTask(data, true)
                               : editTask(data, false);
+
                             // }
                           }}
                           icon={<EditIcon />}
+                          // icon={
+                          //   data.toggleEdit ? (
+                          //     <EditIcon />
+                          //   ) : (
+                          //     <CheckCircleOutlineIcon />
+                          //   )
+                          // }
                           checkedIcon={<CheckCircleOutlineIcon />}
                         />
                       }
