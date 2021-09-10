@@ -115,8 +115,6 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   };
 
   const editTask = (data) => {
-    setChangeEdit(!changeEdit);
-
     if (!editText) return;
 
     homeCtx.dispatchHome({
@@ -208,7 +206,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                     <input
                       className={classes.input}
                       type="text"
-                      value={data.id === editing.toString() && data.task}
+                      value={data.id === editing.toString() && editText}
                       onChange={(e) => {
                         setEditText(e.target.value);
                         editTask(editText);
@@ -240,6 +238,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                               : false
                           }
                           onClick={(e) => {
+                            setEditText(data.task);
                             checkEditing(data.id);
                             e.target.checked
                               ? hideEditButton(data)
@@ -248,17 +247,11 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                             setEditId(cardData[i].id);
 
                             editTask(data);
+                            setChangeEdit(!changeEdit);
 
                             // }
                           }}
                           icon={<EditIcon />}
-                          // icon={
-                          //   data.toggleEdit ? (
-                          //     <EditIcon />
-                          //   ) : (
-                          //     <CheckCircleOutlineIcon />
-                          //   )
-                          // }
                           checkedIcon={<CheckCircleOutlineIcon />}
                         />
                       }
