@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) =>
       marginBottom: 12,
     },
     cardWords: {
+      width: "100%",
       wordBreak: "break-word",
       //mobile version
       [theme.breakpoints.down("sm")]: {
@@ -53,6 +54,23 @@ const useStyles = makeStyles((theme) =>
     editIcon: {
       cursor: "pointer",
       color: "rgba(0, 0, 0, 0.54)",
+    },
+    labelWrapper: {
+      wwidth: "100%",
+    },
+    input: {
+      padding: "0.5rem",
+      width: "90%",
+      //mobile version
+      [theme.breakpoints.down("md")]: {
+        width: "85%",
+      },
+      [theme.breakpoints.down("sm")]: {
+        width: "80%",
+      },
+      "&:focus": {
+        outline: "none",
+      },
     },
   })
 );
@@ -73,9 +91,8 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   const [changeEdit, setChangeEdit] = useState(false);
   const [editText, setEditText] = useState();
   const [editId, setEditId] = useState();
-  const [editing, setEditing] = useState(true);
+  const [editing, setEditing] = useState("");
   const [notEditing, setNotEditing] = useState("");
-  const [notEditingData, setNotEditingData] = useState("");
 
   const changeToDone = (data) => {
     homeCtx.dispatchHome({
@@ -97,14 +114,14 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
     });
   };
 
-  const editTask = (data, isEditTrue) => {
+  const editTask = (data) => {
     setChangeEdit(!changeEdit);
 
     if (!editText) return;
 
     homeCtx.dispatchHome({
       type: "EDIT_TASK",
-      payload: { data: { ...data, task: editText }, edit: isEditTrue },
+      payload: { data: { ...data, task: editText } },
     });
   };
 
@@ -138,19 +155,27 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
     const unClikedEditButton = cardData.filter((item) => {
       return item.id !== id;
     });
-    const unClikedEditId = unClikedEditButton.map((item, i) => {
+    const unClikedEditId = unClikedEditButton.map((item) => {
       return item.id;
     });
 
     setNotEditing(unClikedEditId);
+
+    const clikedEditButton = cardData.filter((item) => {
+      return item.id === id;
+    });
+
+    const clikedEditId = clikedEditButton.map((item) => {
+      return item.id;
+    });
+
+    setEditing(clikedEditId);
   };
 
   return (
     <>
       {cardData &&
         cardData.map((data, i) => {
-          console.log("data", data);
-
           return (
             <div className={classes.cardContainer} key={data.id}>
               <Card className={classes.root}>
@@ -181,14 +206,13 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                   )}
                   {changeEdit && cardData[i].id === editId && (
                     <input
+                      className={classes.input}
                       type="text"
-                      // onChange={(e) => {
-                      //   if (cardData[i]) {
-                      //     setEditText(e.target.value);
-                      //   }
-                      // }}
-                      value={editText}
-                      onChange={(e) => setEditText(e.target.value)}
+                      value={data.id === editing.toString() && data.task}
+                      onChange={(e) => {
+                        setEditText(e.target.value);
+                        editTask(editText);
+                      }}
                     />
                   )}
                 </CardContent>
@@ -217,16 +241,13 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                           }
                           onClick={(e) => {
                             checkEditing(data.id);
-                            setEditing(!editing);
                             e.target.checked
                               ? hideEditButton(data)
                               : showEditButton(data);
 
                             setEditId(cardData[i].id);
 
-                            changeEdit
-                              ? editTask(data, true)
-                              : editTask(data, false);
+                            editTask(data);
 
                             // }
                           }}
