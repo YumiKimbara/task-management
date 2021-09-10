@@ -227,7 +227,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                       }
                     />
                   )}
-                  {!data.isDone && (
+                  {!data.isDone && !checkKey && (
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -245,11 +245,8 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                               : showEditButton(data);
 
                             setEditId(cardData[i].id);
-
                             editTask(data);
                             setChangeEdit(!changeEdit);
-
-                            // }
                           }}
                           icon={<EditIcon />}
                           checkedIcon={<CheckCircleOutlineIcon />}
