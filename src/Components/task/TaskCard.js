@@ -93,6 +93,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   const [editId, setEditId] = useState();
   const [editing, setEditing] = useState("");
   const [notEditing, setNotEditing] = useState("");
+  const [error, setError] = useState(false);
 
   const changeToDone = (data) => {
     homeCtx.dispatchHome({
@@ -108,6 +109,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   };
 
   const changeToKeyTask = (data, isKeyTrue) => {
+    console.log("key", data, isKeyTrue);
     homeCtx.dispatchHome({
       type: "KEY_TASK",
       payload: { data: data, key: isKeyTrue },
@@ -115,8 +117,6 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   };
 
   const editTask = (data) => {
-    if (!editText) return;
-
     homeCtx.dispatchHome({
       type: "EDIT_TASK",
       payload: { data: { ...data, task: editText } },
@@ -183,6 +183,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                       control={
                         //if task is done, check the checkbox
                         <OrangeCheckbox
+                          disabled={changeEdit ? true : false}
                           checked={data.isDone ? true : false}
                           name="checkedB"
                           id={data.id}
@@ -209,6 +210,8 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                       value={data.id === editing.toString() && editText}
                       onChange={(e) => {
                         setEditText(e.target.value);
+                        !e.target.value ? setError(true) : setError(false);
+                        console.log(error);
                         editTask(editText);
                       }}
                     />
@@ -232,8 +235,9 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                       control={
                         <Checkbox
                           disabled={
-                            notEditing.includes(cardData[i].id) &&
-                            !data.toggleEdit
+                            (notEditing.includes(cardData[i].id) &&
+                              !data.toggleEdit) ||
+                            error
                               ? true
                               : false
                           }
@@ -254,21 +258,38 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                       }
                     />
                   )}
-                  {!data.isKey ? (
-                    <StarBorderRoundedIcon
-                      className={classes.StarBorderRoundedIcon}
-                      onClick={(e) => {
-                        changeToKeyTask(data, true);
-                      }}
-                    />
-                  ) : (
-                    <StarRoundedIcon
-                      className={classes.StarRoundedIcon}
-                      onClick={(e) => {
-                        changeToKeyTask(data, false);
-                      }}
-                    />
-                  )}
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        disabled={changeEdit ? true : false}
+                        onClick={() => {
+                          changeToKeyTask(data, !data.isKey);
+                        }}
+                        icon={
+                          !data.isKey ? (
+                            <StarBorderRoundedIcon
+                              className={classes.StarBorderRoundedIcon}
+                            />
+                          ) : (
+                            <StarRoundedIcon
+                              className={classes.StarRoundedIcon}
+                            />
+                          )
+                        }
+                        checkedIcon={
+                          data.isKey ? (
+                            <StarRoundedIcon
+                              className={classes.StarRoundedIcon}
+                            />
+                          ) : (
+                            <StarBorderRoundedIcon
+                              className={classes.StarBorderRoundedIcon}
+                            />
+                          )
+                        }
+                      />
+                    }
+                  />
                 </CardActions>
               </Card>
             </div>
@@ -279,3 +300,20 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
 };
 
 export default TaskCard;
+
+// {!data.isKey ? (
+//   <StarBorderRoundedIcon
+//     disabled={changeEdit ? true : false}
+//     className={classes.StarBorderRoundedIcon}
+//     onClick={(e) => {
+//       changeToKeyTask(data, true);
+//     }}
+//   />
+// ) : (
+//   <StarRoundedIcon
+//     className={classes.StarRoundedIcon}
+//     onClick={(e) => {
+//       changeToKeyTask(data, false);
+//     }}
+//   />
+// )}
