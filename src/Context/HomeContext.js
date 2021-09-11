@@ -13,6 +13,7 @@ export const HomeContextProvider = (props) => {
     taskText: "",
     keyTaskPage: false,
     checkConfetti: false,
+    isEditing: false,
   };
 
   const [state, dispatchHome] = useReducer(HomeReducer, initialState);
@@ -24,6 +25,7 @@ export const HomeContextProvider = (props) => {
         taskText: state.taskText,
         keyTaskPage: state.keyTaskPage,
         checkConfetti: state.checkConfetti,
+        isEditing: state.isEditing,
         dispatchHome: dispatchHome,
       }}
     >

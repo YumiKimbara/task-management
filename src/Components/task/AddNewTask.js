@@ -111,7 +111,6 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
           task: homeCtx.taskText,
           isDone: false,
           isKey: false,
-          toggleEdit: true,
         },
       });
 
@@ -155,7 +154,7 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
         <form
           className={classes.root}
           onKeyDown={(e) => {
-            e.key === "Enter" && createTask();
+            e.key === "Enter" && !homeCtx.isEditing && createTask();
           }}
           onSubmit={(e) => {
             e.preventDefault();
@@ -165,7 +164,7 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
             size="small"
             aria-label="add"
             className={classes.addButton}
-            onClick={createTask}
+            onClick={!homeCtx.isEditing && createTask}
           >
             <AddIcon />
           </OrangeFab>

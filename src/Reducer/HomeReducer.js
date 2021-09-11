@@ -67,36 +67,38 @@ const HomeReducer = (state, action) => {
             return {
               ...taskData,
               task: action.payload.data.task,
-              isEdit: action.payload.edit,
+              // isEdit: action.payload.edit,
             };
           }
           return taskData;
         }),
       };
-    case "SHOW_EDIT":
-      return {
-        ...state,
-        storeTaskData: state.storeTaskData.map((taskData) => {
-          if (action.payload.id !== taskData.id) {
-            // return previous task data. also update toggleEdit part
-            return { ...taskData, toggleEdit: true };
-          }
+    case "EDIT_STATUS":
+      return { ...state, isEditing: action.payload };
+    // case "SHOW_EDIT":
+    //   return {
+    //     ...state,
+    //     storeTaskData: state.storeTaskData.map((taskData) => {
+    //       if (action.payload.id !== taskData.id) {
+    //         // return previous task data
+    //         return { ...taskData };
+    //       }
 
-          return taskData;
-        }),
-      };
-    case "HIDE_EDIT":
-      return {
-        ...state,
-        storeTaskData: state.storeTaskData.map((taskData) => {
-          if (action.payload.id !== taskData.id) {
-            // return previous task data. also update toggleEdit part
-            return { ...taskData, toggleEdit: false };
-          }
+    //       return taskData;
+    //     }),
+    //   };
+    // case "HIDE_EDIT":
+    //   return {
+    //     ...state,
+    //     storeTaskData: state.storeTaskData.map((taskData) => {
+    //       if (action.payload.id !== taskData.id) {
+    // return previous task data
+    //     return { ...taskData };
+    //   }
 
-          return taskData;
-        }),
-      };
+    //   return taskData;
+    // }),
+    // };
   }
 };
 
