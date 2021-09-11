@@ -126,6 +126,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
   };
 
   const editTask = (data) => {
+    if (!editText) return;
     homeCtx.dispatchHome({
       type: "EDIT_TASK",
       payload: { data: { ...data, task: editText } },
