@@ -16,6 +16,7 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import Edit from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -224,6 +225,21 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                         !e.target.value ? setError(true) : setError(false);
                         console.log(error);
                         editTask(editText);
+                      }}
+                      onKeyPress={(e) => {
+                        console.log(changeEdit);
+                        if (e.key === "Enter") {
+                          console.log("editing", editing);
+                          setEditText(data.task);
+                          checkEditing(data.id);
+                          e.target.checked
+                            ? hideEditButton(data)
+                            : showEditButton(data);
+
+                          setEditId(cardData[i].id);
+                          editTask(data);
+                          setChangeEdit(!changeEdit);
+                        }
                       }}
                     />
                   )}
