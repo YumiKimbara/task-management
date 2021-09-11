@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) =>
         padding: "8px",
       },
     },
+    sample: {
+      margin: 0,
+    },
     checkCircleIcon: {
       color: orange[900],
     },
@@ -225,17 +228,19 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                 </CardContent>
                 <CardActions>
                   {data.isDone && !checkKey && (
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          color="default"
-                          onClick={() => {
-                            data.isDone && deleteTask(data, true);
-                          }}
-                          icon={<DeleteIcon />}
-                        />
-                      }
-                    />
+                    <div className={classes.iconWrapper}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            color="default"
+                            onClick={() => {
+                              data.isDone && deleteTask(data, true);
+                            }}
+                            icon={<DeleteIcon className={classes.sample} />}
+                          />
+                        }
+                      />
+                    </div>
                   )}
                   {!data.isDone && !checkKey && (
                     <FormControlLabel

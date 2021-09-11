@@ -10,7 +10,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    sample: {
+    container: {
       display: "flex",
       justifyContent: "space-between",
       marginTop: "1rem",
@@ -30,7 +30,7 @@ const AppRouter = () => {
       <Router>
         <Header checkKey={checkKey} setCheckKey={setCheckKey} />
         <Switch>
-          <div className={classes.sample}>
+          <div className={classes.container}>
             <Route path="/" exact component={Home} />
             <Route
               path="/Home"
