@@ -75,30 +75,6 @@ const HomeReducer = (state, action) => {
       };
     case "EDIT_STATUS":
       return { ...state, isEditing: action.payload };
-    // case "SHOW_EDIT":
-    //   return {
-    //     ...state,
-    //     storeTaskData: state.storeTaskData.map((taskData) => {
-    //       if (action.payload.id !== taskData.id) {
-    //         // return previous task data
-    //         return { ...taskData };
-    //       }
-
-    //       return taskData;
-    //     }),
-    //   };
-    // case "HIDE_EDIT":
-    //   return {
-    //     ...state,
-    //     storeTaskData: state.storeTaskData.map((taskData) => {
-    //       if (action.payload.id !== taskData.id) {
-    // return previous task data
-    //     return { ...taskData };
-    //   }
-
-    //   return taskData;
-    // }),
-    // };
   }
 };
 

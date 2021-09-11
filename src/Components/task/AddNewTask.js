@@ -185,7 +185,7 @@ const AddNewTask = ({ checkKey, setConfetti, setOpen }) => {
           ) : (
             <OrangeTextField
               style={{ margin: 8 }}
-              placeholder="ADD NEW TASK HERE"
+              placeholder="ADD A NEW TASK HERE"
               fullWidth
               margin="normal"
               InputLabelProps={{
