@@ -215,6 +215,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                   )}
                   {changeEdit && cardData[i].id === editId && (
                     <input
+                      autoFocus
                       className={classes.input}
                       type="text"
                       value={data.id === editing.toString() && editText}
