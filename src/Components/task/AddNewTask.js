@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) =>
       //mobile version
       [theme.breakpoints.down("sm")]: {
         fontSize: "0.6rem",
+        width: "20vw",
       },
     },
     addContainer: {
