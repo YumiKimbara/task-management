@@ -70,12 +70,14 @@ const useStyles = makeStyles((theme) =>
     input: {
       padding: "0.5rem",
       width: "90%",
+      border: "1px solid grey",
+      borderRadius: "4px",
       //mobile version
       [theme.breakpoints.down("md")]: {
         width: "85%",
       },
       [theme.breakpoints.down("sm")]: {
-        width: "80%",
+        width: "50%",
       },
       "&:focus": {
         outline: "none",
