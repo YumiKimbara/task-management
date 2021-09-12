@@ -35,16 +35,24 @@ const useStyles = makeStyles((theme) =>
     pos: {
       marginBottom: 12,
     },
-    cardWords: {
+    cardLeft: {
       width: "100%",
       wordBreak: "break-word",
+      margin: "auto 0",
+      paddingLeft: "1.5rem",
       //mobile version
       [theme.breakpoints.down("sm")]: {
-        padding: "8px",
+        padding: "8px, 8px, 8px, 15px",
       },
     },
-    sample: {
-      margin: 0,
+    cardRight: {
+      paddingRight: "1.5rem",
+      [theme.breakpoints.down("sm")]: {
+        paddingRight: "0.5rem",
+      },
+    },
+    cardIcons: {
+      margin: "0px",
     },
     checkCircleIcon: {
       color: orange[900],
@@ -65,19 +73,22 @@ const useStyles = makeStyles((theme) =>
       color: "rgba(0, 0, 0, 0.54)",
     },
     labelWrapper: {
-      wwidth: "100%",
+      width: "100%",
+    },
+    icons: {
+      margin: "0px",
     },
     input: {
       padding: "0.5rem",
-      width: "90%",
+      width: "80%",
       border: "1px solid grey",
       borderRadius: "4px",
       //mobile version
       [theme.breakpoints.down("md")]: {
-        width: "85%",
+        width: "70%",
       },
       [theme.breakpoints.down("sm")]: {
-        width: "50%",
+        width: "42%",
       },
       "&:focus": {
         outline: "none",
@@ -188,9 +199,10 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
           return (
             <div className={classes.cardContainer} key={data.id}>
               <Card className={classes.root}>
-                <CardContent className={classes.cardWords}>
+                <CardContent className={classes.cardLeft}>
                   {!checkKey && (
                     <FormControlLabel
+                      className={classes.icons}
                       control={
                         //if task is done, check the checkbox
                         <OrangeCheckbox
@@ -241,10 +253,11 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                     />
                   )}
                 </CardContent>
-                <CardActions>
+                <CardActions className={classes.cardRight}>
                   {data.isDone && !checkKey && (
                     <div className={classes.iconWrapper}>
                       <FormControlLabel
+                        className={classes.icons}
                         control={
                           <Checkbox
                             disabled={homeCtx.isEditing ? true : false}
@@ -252,7 +265,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                             onClick={() => {
                               data.isDone && deleteTask(data, true);
                             }}
-                            icon={<DeleteIcon className={classes.sample} />}
+                            icon={<DeleteIcon />}
                           />
                         }
                       />
@@ -260,6 +273,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                   )}
                   {!data.isDone && !checkKey && (
                     <FormControlLabel
+                      className={classes.icons}
                       control={
                         <Checkbox
                           color="default"
@@ -302,6 +316,7 @@ const TaskCard = ({ cardData, checkKey, setConfetti, setOpen }) => {
                     />
                   )}
                   <FormControlLabel
+                    className={classes.icons}
                     control={
                       <Checkbox
                         color="default"

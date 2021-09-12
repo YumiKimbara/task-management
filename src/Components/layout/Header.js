@@ -36,7 +36,9 @@ const useStyles = makeStyles(() =>
 );
 
 const Header = ({ checkKey, setCheckKey }) => {
+  const homeCtx = useContext(HomeContext);
   const classes = useStyles();
+
   return (
     <>
       <div className={classes.headerContainer}>
@@ -44,18 +46,23 @@ const Header = ({ checkKey, setCheckKey }) => {
           <h3>TASK MANAGEMENT</h3>
         </div>
         <div>
+          {console.log(homeCtx.isEditing)}
           {checkKey ? (
             <StarRoundedIcon
               className={classes.starRoundIcon}
               onClick={() => {
-                setCheckKey(!checkKey);
+                if (!homeCtx.isEditing) {
+                  setCheckKey(!checkKey);
+                }
               }}
             />
           ) : (
             <StarBorderRoundedIcon
               className={classes.starBorderRoundIcon}
               onClick={() => {
-                setCheckKey(!checkKey);
+                if (!homeCtx.isEditing) {
+                  setCheckKey(!checkKey);
+                }
               }}
             />
           )}
