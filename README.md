@@ -1,6 +1,12 @@
 # Task Management App
 
+Task Management App is a CRUD application that you can create, read, update, and delete tasks.
+
 ### Features
+
+- CRUD application
+- Bookmark function
+- You can delete all tasks at once
 
 ### Languages
 
