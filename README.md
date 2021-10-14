@@ -2,7 +2,7 @@
 
 Task Management App is a CRUD application that you can create, read, update, and delete tasks.
 
-<img src="public/images/taskManagement.gif" />
+<img src="public/images/taskManagement.gif" width="700px"/>
 
 ### Features
 
